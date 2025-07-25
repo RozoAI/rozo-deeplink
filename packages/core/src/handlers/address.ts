@@ -1,6 +1,5 @@
-import { ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
-import { baseUSDC } from "@rozoai/intent-common";
 import { getAddress, isAddress } from "viem";
+import { baseUSDC, ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
 import { isValidSolanaAddress } from "../protocols/solana";
 import { isValidStellarAddress } from "../protocols/stellar";
 import type { DeeplinkData } from "../types";

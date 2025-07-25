@@ -4,7 +4,7 @@ import { useState } from "react";
 import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import {
   Sheet,
   SheetContent,

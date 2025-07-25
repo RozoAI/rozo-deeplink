@@ -1,5 +1,5 @@
-import { baseUSDC } from "@rozoai/intent-common";
 import { describe, expect, it } from "vitest";
+import { baseUSDC } from "../constants";
 import { parseEthereum } from "../protocols/ethereum";
 import type { EthereumParseResult } from "../types";
 
@@ -57,21 +57,19 @@ describe("Ethereum Parser", () => {
     it("should parse an ERC-20 transfer", () => {
       const input = `ethereum:${baseUSDC.token}/transfer?address=${anotherAddress}&uint256=1e6`;
       const result = parseEthereum(input) as EthereumParseResult;
-      
-        expect(result).toHaveProperty("type", "ethereum");
-        expect(result).toHaveProperty("address", anotherAddress);
-        expect(result).toHaveProperty("operation", "transfer");
-        expect(result).toHaveProperty("amount", "1e6");
-      
+
+      expect(result).toHaveProperty("type", "ethereum");
+      expect(result).toHaveProperty("address", anotherAddress);
+      expect(result).toHaveProperty("operation", "transfer");
+      expect(result).toHaveProperty("amount", "1e6");
     });
 
     it("should handle missing recipient in ERC-20 transfer", () => {
       const input = `ethereum:${baseUSDC.token}/transfer?uint256=1e6`;
       const result = parseEthereum(input) as EthereumParseResult;
       console.log({ result });
-      
-        expect(result).toHaveProperty("operation", "transfer");
-      
+
+      expect(result).toHaveProperty("operation", "transfer");
     });
   });
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { baseUSDC } from "../constants";
 import { parseStellar } from "../protocols/stellar";
 import type { StellarParseResult } from "../types";
-import { baseUSDC } from "@rozoai/intent-common";
 
 describe("Stellar Parser", () => {
   const stellarAddress =

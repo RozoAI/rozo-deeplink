@@ -1,6 +1,5 @@
-import { ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
-import { baseUSDC } from "@rozoai/intent-common";
 import { StrKey } from "@stellar/stellar-sdk";
+import { baseUSDC, ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
 import { type StellarParseResult } from "../types";
 import { createTransactionMessage } from "../utils";
 

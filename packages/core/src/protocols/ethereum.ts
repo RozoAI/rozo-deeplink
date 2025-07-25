@@ -1,5 +1,5 @@
-import { baseUSDC } from "@rozoai/intent-common";
 import { getAddress, isAddress } from "viem";
+import { baseUSDC } from "../constants";
 import type { EthereumParseResult } from "../types";
 import { createTransactionMessage } from "../utils";
 
