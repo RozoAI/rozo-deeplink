@@ -1,19 +1,19 @@
-# @rozo-deeplink/scan-qr
+# @rozoai/deeplink-react
 
-A React component for scanning QR codes and parsing them with `@rozo-deeplink/core`.
+A React component for scanning QR codes and parsing them with `@rozoai/deeplink-core`.
 
 ## Installation
 
 ```bash
-pnpm add @rozo-deeplink/scan-qr @rozo-deeplink/core
+pnpm add @rozoai/deeplink-react @rozoai/deeplink-core
 ```
 
 ## Usage
 
 ```tsx
 import { useState } from "react";
-import { ScanQr } from "@rozo-deeplink/scan-qr";
-import { type DeeplinkData } from "@rozo-deeplink/core";
+import { ScanQr } from "@rozoai/deeplink-react";
+import { type DeeplinkData } from "@rozoai/deeplink-core";
 
 function MyComponent() {
   const [isScannerOpen, setScannerOpen] = useState(false);
@@ -53,5 +53,5 @@ function MyComponent() {
 
 ## Related Packages
 
-- **[@rozo-deeplink/core](../core)**: The core library for parsing deeplinks from various blockchain and payment protocols.
-- **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozo-deeplink/core` and `@rozo-deeplink/scan-qr`. 
+- **[@rozoai/deeplink-core](../core)**: The core library for parsing deeplinks from various blockchain and payment protocols.
+- **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozoai/deeplink-core` and `@rozoai/deeplink-react`. 

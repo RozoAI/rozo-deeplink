@@ -1,6 +1,6 @@
 "use client";
 
-import { parseDeeplink, type DeeplinkData } from "@rozo-deeplink/core";
+import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
 import {
   type IDetectedBarcode,
   IScannerProps,

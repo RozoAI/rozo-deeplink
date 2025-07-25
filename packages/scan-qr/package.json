@@ -1,7 +1,8 @@
 {
-  "name": "@rozo-deeplink/scan-qr",
+  "name": "@rozoai/deeplink-react",
   "version": "1.0.0",
-  "description": "",
+  "author": "Rozo AI",
+  "description": "React component for scanning QR codes",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -17,14 +18,13 @@
     "dev": "vite dev",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["react", "qr", "scanner", "deeplink", "rozoai", "web3", "solana", "ethereum", "stellar", "crypto"],
+  "license": "MIT",
   "peerDependencies": {
     "react": ">=18"
   },
   "dependencies": {
-    "@rozo-deeplink/core": "workspace:*",
+    "@rozoai/deeplink-core": "workspace:*",
     "@yudiel/react-qr-scanner": "^2.3.1"
   },
   "devDependencies": {

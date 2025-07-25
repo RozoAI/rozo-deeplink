@@ -201,5 +201,5 @@ function QRScanner() {
 
 ## Related Packages
 
-- **[@rozo-deeplink/scan-qr](../scan-qr)**: A React component for scanning QR codes and parsing them with this library.
-- **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozo-deeplink/core` and `@rozo-deeplink/scan-qr`.
+- **[@rozoai/deeplink-react](../scan-qr)**: A React component for scanning QR codes and parsing them with this library.
+- **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozoai/deeplink-core` and `@rozoai/deeplink-react`.

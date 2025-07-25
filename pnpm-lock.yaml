@@ -42,10 +42,10 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
-      '@rozo-deeplink/core':
+      '@rozoai/deeplink-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@rozo-deeplink/scan-qr':
+      '@rozoai/deeplink-react':
         specifier: workspace:*
         version: link:../../packages/scan-qr
       class-variance-authority:
@@ -133,7 +133,7 @@ importers:
 
   packages/scan-qr:
     dependencies:
-      '@rozo-deeplink/core':
+      '@rozoai/deeplink-core':
         specifier: workspace:*
         version: link:../core
       '@yudiel/react-qr-scanner':

@@ -29,7 +29,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@rozo-deeplink/core": resolve(__dirname, "../core/dist"),
+      "@rozoai/deeplink-core": resolve(__dirname, "../core/dist"),
     },
   },
 }); 

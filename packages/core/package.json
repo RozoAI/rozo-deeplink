@@ -1,7 +1,7 @@
 {
-  "name": "@rozo-deeplink/core",
+  "name": "@rozoai/deeplink-core",
   "version": "1.0.0",
-  "description": "",
+  "description": "Core library for deeplink",
   "type": "module",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.mjs",
@@ -18,9 +18,9 @@
     "test": "vitest",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["rozoai", "deeplink", "core", "web3", "solana", "ethereum", "stellar", "crypto"],
+  "author": "Rozo AI",
+  "license": "MIT",
   "devDependencies": {
     "@solana/web3.js": "^1.95.1",
     "@swc/core": "^1.13.2",
