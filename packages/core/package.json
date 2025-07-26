@@ -18,7 +18,16 @@
     "test": "vitest",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
-  "keywords": ["rozoai", "deeplink", "core", "web3", "solana", "ethereum", "stellar", "crypto"],
+  "keywords": [
+    "rozoai",
+    "deeplink",
+    "core",
+    "web3",
+    "solana",
+    "ethereum",
+    "stellar",
+    "crypto"
+  ],
   "author": "Rozo AI",
   "license": "MIT",
   "devDependencies": {
@@ -29,5 +38,8 @@
     "typescript": "^5.8.3",
     "vite": "^7.0.6",
     "vite-plugin-dts": "^4.5.4"
+  },
+  "dependencies": {
+    "query-string": "^9.2.2"
   }
 }
