@@ -16,12 +16,25 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite dev",
-    "clean": "rm -rf dist && rm -rf node_modules"
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "bumpp": "bumpp"
   },
-  "keywords": ["react", "qr", "scanner", "deeplink", "rozoai", "web3", "solana", "ethereum", "stellar", "crypto"],
+  "keywords": [
+    "react",
+    "qr",
+    "scanner",
+    "deeplink",
+    "rozoai",
+    "web3",
+    "solana",
+    "ethereum",
+    "stellar",
+    "crypto"
+  ],
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@rozoai/deeplink-core": "workspace:*",

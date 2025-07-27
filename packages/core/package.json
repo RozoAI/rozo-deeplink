@@ -16,7 +16,8 @@
   "scripts": {
     "build": "vite build",
     "test": "vitest",
-    "clean": "rm -rf dist && rm -rf node_modules"
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "bumpp": "bumpp"
   },
   "keywords": [
     "rozoai",
@@ -41,5 +42,8 @@
   },
   "dependencies": {
     "query-string": "^9.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
