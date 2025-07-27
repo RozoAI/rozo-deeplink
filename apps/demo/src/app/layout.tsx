@@ -1,11 +1,10 @@
+import { FabActions } from "@demo/components/fab-actions";
+import IntercomInitializer from "@demo/components/intercom";
+import { Toaster } from "@demo/components/ui/sonner";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
-import IntercomInitializer from "@/components/intercom";
-import { FabActions } from "@/components/fab-actions";
-import { ThemeProvider } from "next-themes";
-import Footer from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,13 +37,11 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-            <Toaster position="top-center" />
-            <IntercomInitializer
-              appId={process.env.INTERCOM_APP_ID as string}
-            />
+          <Toaster position="top-center" />
+          <IntercomInitializer appId={process.env.INTERCOM_APP_ID as string} />
 
-            {children}
-            <FabActions />
+          {children}
+          <FabActions />
         </ThemeProvider>
       </body>
     </html>

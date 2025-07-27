@@ -40,11 +40,11 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
       '@rozoai/deeplink-core':
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: workspace:*
+        version: link:../../packages/core
       '@rozoai/deeplink-react':
-        specifier: 1.0.0
-        version: 1.0.0(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: workspace:*
+        version: link:../../packages/scan-qr
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1068,18 +1068,6 @@ packages:
     resolution: {integrity: sha512-HwHCH5GQTOeGYP5wBEBXFVhfQecwRl24Rugoqhh8YwGarsU09bHhOKuqlyW4ZolZCan3eTUax7UJbGSmKSM51A==}
     cpu: [x64]
     os: [win32]
-
-  '@rozoai/deeplink-core@1.0.0':
-    resolution: {integrity: sha512-ni3/qxs7Uyt1X7qKcXXmtzekkng/lIGCuivBeQM4CAMyM6yVfV3q2es4eZb80an4uI/YJWmzbI2FRZsnUqOdXw==}
-
-  '@rozoai/deeplink-core@1.0.1':
-    resolution: {integrity: sha512-050VlgrVmkkumKTmPGAnOQN1E8QbrcktF62cBmozI4M4P3UpEr4KqpRnKnfABkiep1DAWRGTa5MU2NQJexYDdg==}
-
-  '@rozoai/deeplink-react@1.0.0':
-    resolution: {integrity: sha512-yn0vcLE7IMt1g3PqH6HxW4xv0YCD2mIXxJ7wQsf/otbnsJjjcnak+jL/Pc0SE9Zw1Q/uM3DQMy0dyKe4eLuC3w==}
-    peerDependencies:
-      react: '>=18'
-      react-dom: '>=18'
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -4538,23 +4526,6 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.45.3':
     optional: true
-
-  '@rozoai/deeplink-core@1.0.0':
-    dependencies:
-      query-string: 9.2.2
-
-  '@rozoai/deeplink-core@1.0.1':
-    dependencies:
-      query-string: 9.2.2
-
-  '@rozoai/deeplink-react@1.0.0(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      '@rozoai/deeplink-core': 1.0.0
-      '@yudiel/react-qr-scanner': 2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-    transitivePeerDependencies:
-      - '@types/emscripten'
 
   '@rtsao/scc@1.1.0': {}
 

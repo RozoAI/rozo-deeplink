@@ -1,22 +1,22 @@
 "use client";
 
-import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
+import Footer from "@demo/components/footer";
+import { Button } from "@demo/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from "@demo/components/ui/card";
+import { Input } from "@demo/components/ui/input";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@demo/components/ui/sheet";
 import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
 import { ScanQr } from "@rozoai/deeplink-react";
 import { FileCode, Globe, QrCode, SquareCode } from "lucide-react";
