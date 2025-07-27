@@ -40,11 +40,11 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.8)(react@19.1.0)
       '@rozoai/deeplink-core':
-        specifier: 1.0.0
-        version: 1.0.0
+        specifier: 1.0.1
+        version: 1.0.1
       '@rozoai/deeplink-react':
         specifier: 1.0.0
-        version: 1.0.0(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 1.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1074,6 +1074,9 @@ packages:
 
   '@rozoai/deeplink-core@1.0.0':
     resolution: {integrity: sha512-ni3/qxs7Uyt1X7qKcXXmtzekkng/lIGCuivBeQM4CAMyM6yVfV3q2es4eZb80an4uI/YJWmzbI2FRZsnUqOdXw==}
+
+  '@rozoai/deeplink-core@1.0.1':
+    resolution: {integrity: sha512-050VlgrVmkkumKTmPGAnOQN1E8QbrcktF62cBmozI4M4P3UpEr4KqpRnKnfABkiep1DAWRGTa5MU2NQJexYDdg==}
 
   '@rozoai/deeplink-react@1.0.0':
     resolution: {integrity: sha512-yn0vcLE7IMt1g3PqH6HxW4xv0YCD2mIXxJ7wQsf/otbnsJjjcnak+jL/Pc0SE9Zw1Q/uM3DQMy0dyKe4eLuC3w==}
@@ -4572,7 +4575,11 @@ snapshots:
     dependencies:
       query-string: 9.2.2
 
-  '@rozoai/deeplink-react@1.0.0(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@rozoai/deeplink-core@1.0.1':
+    dependencies:
+      query-string: 9.2.2
+
+  '@rozoai/deeplink-react@1.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@rozoai/deeplink-core': 1.0.0
       '@yudiel/react-qr-scanner': 2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
