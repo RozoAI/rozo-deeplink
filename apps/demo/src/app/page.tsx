@@ -1,17 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
+import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import {
   Card,
   CardContent,
@@ -19,9 +9,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FileCode, Globe, QrCode, SquareCode } from "lucide-react";
-import Footer from "@/components/footer";
+import { Input } from "@/components/ui/input";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
 import { ScanQr } from "@rozoai/deeplink-react";
+import { FileCode, Globe, QrCode, SquareCode } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function DeeplinkParserPage() {
   const [inputValue, setInputValue] = useState("");
@@ -46,6 +46,7 @@ export default function DeeplinkParserPage() {
 
   const handleScanSuccess = (data: DeeplinkData) => {
     setParsedData(data);
+    setInputValue("");
     setSheetOpen(false);
     toast.success("QR code scanned successfully!");
   };
@@ -122,9 +123,7 @@ export default function DeeplinkParserPage() {
                 {getIcon(parsedData.type)}
                 <CardTitle className="capitalize">{parsedData.type}</CardTitle>
               </div>
-              <CardDescription>
-                Parsed data from the deeplink
-              </CardDescription>
+              <CardDescription>Parsed data from the deeplink</CardDescription>
             </CardHeader>
             <CardContent>
               <ParsedDataViewer data={parsedData} />
@@ -162,4 +161,4 @@ function ParsedDataViewer({ data }: { data: Record<string, any> }) {
       })}
     </div>
   );
-} 
+}
