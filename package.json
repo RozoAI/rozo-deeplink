@@ -5,7 +5,7 @@
     "build": "pnpm --filter=\"./packages/*\" build",
     "dev": "pnpm --filter=demo dev",
     "test": "pnpm --filter=\"./packages/*\" test",
-    "clean": "pnpm -r clean"
+    "clean": "pnpm -r clean && rm -rf node_modules"
   },
   "devDependencies": {
     "bumpp": "^10.2.0",

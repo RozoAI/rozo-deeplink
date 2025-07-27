@@ -6,13 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rm -rf .next node_modules"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
-    "@rozoai/deeplink-core": "1.0.0",
+    "@rozoai/deeplink-core": "1.0.1",
     "@rozoai/deeplink-react": "1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
