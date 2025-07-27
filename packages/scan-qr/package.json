@@ -1,8 +1,12 @@
 {
   "name": "@rozoai/deeplink-react",
   "version": "1.0.0",
-  "author": "Rozo AI",
   "description": "React component for scanning QR codes",
+  "repository": {
+    "type": "git",
+    "url": "github:RozoAI/rozo-deeplink"
+  },
+  "homepage": "https://rozo-deeplink-demo.vercel.app/",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
