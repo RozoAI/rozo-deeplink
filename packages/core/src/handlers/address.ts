@@ -66,7 +66,7 @@ export function parseAddress(input: string): DeeplinkData | null {
           asset: {
             contract: getAddress(addressPart),
           },
-          message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
+          message: `Detected EVM address with chain ${chainId}. Please verify the chain is correct.`,
         };
       }
 
@@ -76,15 +76,11 @@ export function parseAddress(input: string): DeeplinkData | null {
           type: "ethereum",
           address: getAddress(addressPart),
           operation: "transfer",
-          chain_id: chainSpec
-            ? chainSpec.startsWith("0x")
-              ? parseInt(chainSpec, 16)
-              : parseInt(chainSpec, 10)
-            : baseUSDC.chainId,
+          chain_id: chainId,
           asset: {
             contract: getAddress(baseUSDC.token),
           },
-          message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
+          message: `Detected EVM address with chain ${chainId}. Please verify the chain is correct.`,
         };
       }
     } catch {

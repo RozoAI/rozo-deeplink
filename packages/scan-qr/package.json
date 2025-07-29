@@ -1,6 +1,6 @@
 {
   "name": "@rozoai/deeplink-react",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "React component for scanning QR codes",
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@rozoai/deeplink-core": "workspace:*",
+    "@rozoai/deeplink-core": "1.0.4",
     "@yudiel/react-qr-scanner": "^2.3.1"
   },
   "devDependencies": {
