@@ -45,6 +45,12 @@ export function parseAddress(input: string): DeeplinkData | null {
 
       const [addressPart, chainSpec] = target.split("@");
 
+      const chainId = chainSpec
+        ? chainSpec.startsWith("0x")
+          ? parseInt(chainSpec, 16)
+          : parseInt(chainSpec, 10)
+        : baseUSDC.chainId;
+
       // EIP-681 for token transfer, e.g. "ethereum:0xcontract@1/transfer?address=0xrecipient&uint256=1"
       if (
         functionName === "transfer" &&
@@ -52,12 +58,6 @@ export function parseAddress(input: string): DeeplinkData | null {
         isAddress(parsedQuery.address) &&
         isAddress(addressPart)
       ) {
-        const chainId = chainSpec
-          ? chainSpec.startsWith("0x")
-            ? parseInt(chainSpec, 16)
-            : parseInt(chainSpec, 10)
-          : baseUSDC.chainId;
-
         return {
           type: "ethereum",
           address: getAddress(parsedQuery.address),
@@ -66,9 +66,7 @@ export function parseAddress(input: string): DeeplinkData | null {
           asset: {
             contract: getAddress(addressPart),
           },
-          message: chainSpec
-            ? `Detected EVM address with chain ${chainId}. Please verify the chain is correct.`
-            : "Detected EVM address. Please make sure you are sending to Base.",
+          message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
         };
       }
 
@@ -86,9 +84,7 @@ export function parseAddress(input: string): DeeplinkData | null {
           asset: {
             contract: getAddress(baseUSDC.token),
           },
-          message: chainSpec
-            ? `Detected EVM address with chain ${chainSpec}. Please verify the chain is correct.`
-            : "Detected EVM address. Please make sure you are sending to Base.",
+          message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
         };
       }
     } catch {
@@ -106,8 +102,7 @@ export function parseAddress(input: string): DeeplinkData | null {
         asset: {
           contract: getAddress(baseUSDC.token),
         },
-        message:
-          "Detected EVM address. Please make sure you are sending to Base.",
+        message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
       };
     }
   } catch {
