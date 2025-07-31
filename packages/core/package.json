@@ -1,6 +1,6 @@
 {
   "name": "@rozoai/deeplink-core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Core library for deeplink",
   "repository": {
     "type": "git",
@@ -64,6 +64,10 @@
     "query-string": "^9.2.2",
     "viem": "^2.19.4"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "publishConfig": {
     "access": "public"
   }

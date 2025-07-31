@@ -27,11 +27,11 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.9)(react@19.1.0)
       '@rozoai/deeplink-core':
-        specifier: 1.0.6
-        version: 1.0.6(typescript@5.8.3)
+        specifier: 1.0.7
+        version: 1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@rozoai/deeplink-react':
-        specifier: 1.0.4
-        version: 1.0.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
+        specifier: 1.0.5
+        version: 1.0.5(@types/emscripten@1.40.1)(bufferutil@4.0.9)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@uiw/react-json-view':
         specifier: 2.0.0-alpha.33
         version: 2.0.0-alpha.33(@babel/runtime@7.28.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -158,8 +158,8 @@ importers:
   packages/scan-qr:
     dependencies:
       '@rozoai/deeplink-core':
-        specifier: 1.0.6
-        version: 1.0.6(typescript@5.8.3)
+        specifier: 1.0.7
+        version: 1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@yudiel/react-qr-scanner':
         specifier: ^2.3.1
         version: 2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1096,11 +1096,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rozoai/deeplink-core@1.0.6':
-    resolution: {integrity: sha512-YeJ9odGydwkTAxsQlA7Wgh0t6aU8/Jyc6iinzCxVjAafWkKpL8QGXBbhmKAtSd4PrJqwmuBE6oJxstyJwPwnww==}
+  '@rozoai/deeplink-core@1.0.7':
+    resolution: {integrity: sha512-bQdHUwR4xgjbMqH0drqCPR19fN/rd+mbBJpQBs6A+ZUfgleJdyReDV8x0/jwvgIFj35GO9zzZxuryZj9D7Atwg==}
 
-  '@rozoai/deeplink-react@1.0.4':
-    resolution: {integrity: sha512-CLsLHvx/lJe7GaGrpQIUmeLyXxdZu650eb5fD3Un9Z9xZFsfx81PTnfah1bKo7XtIwZ1K7jaaH6PUJilKRScVA==}
+  '@rozoai/deeplink-react@1.0.5':
+    resolution: {integrity: sha512-z8BuVwiQ1krARxWjciZN5pQpJKdnff2kHszSPN9YNNSqfGm1Oayv5V3U4dljs/IJozaOvMAqBZBA6h7ZrV36ig==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -4606,7 +4606,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.46.2':
     optional: true
 
-  '@rozoai/deeplink-core@1.0.6(typescript@5.8.3)':
+  '@rozoai/deeplink-core@1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@stellar/stellar-sdk': 12.3.0
@@ -4620,9 +4620,9 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@rozoai/deeplink-react@1.0.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)':
+  '@rozoai/deeplink-react@1.0.5(@types/emscripten@1.40.1)(bufferutil@4.0.9)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
-      '@rozoai/deeplink-core': 1.0.6(typescript@5.8.3)
+      '@rozoai/deeplink-core': 1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@yudiel/react-qr-scanner': 2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -5855,8 +5855,8 @@ snapshots:
       '@typescript-eslint/parser': 8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3)
       eslint: 9.32.0(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.32.0(jiti@2.5.1))
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.32.0(jiti@2.5.1))
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.32.0(jiti@2.5.1))
       eslint-plugin-react: 7.37.5(eslint@9.32.0(jiti@2.5.1))
       eslint-plugin-react-hooks: 5.2.0(eslint@9.32.0(jiti@2.5.1))
@@ -5879,7 +5879,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.32.0(jiti@2.5.1)):
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.1
@@ -5890,22 +5890,22 @@ snapshots:
       tinyglobby: 0.2.14
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.32.0(jiti@2.5.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1))
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.32.0(jiti@2.5.1)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3)
       eslint: 9.32.0(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.32.0(jiti@2.5.1))
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1))
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.32.0(jiti@2.5.1)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -5916,7 +5916,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.32.0(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.32.0(jiti@2.5.1))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1)))(eslint@9.32.0(jiti@2.5.1))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3

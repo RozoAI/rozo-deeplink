@@ -2,7 +2,7 @@
   "name": "@rozoai/deeplink",
   "private": true,
   "scripts": {
-    "build": "pnpm --filter=\"./packages/*\" build",
+    "build": "pnpm --filter=\"./packages/core\" build && pnpm --filter=\"./packages/scan-qr\" build",
     "dev": "pnpm --filter=demo dev",
     "test": "pnpm --filter=\"./packages/*\" test",
     "clean": "pnpm -r clean && rm -rf node_modules",
