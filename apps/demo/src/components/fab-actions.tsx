@@ -23,11 +23,6 @@ export function FabActions() {
           type="button"
           className={`${actionButtonStyle.base} ${actionButtonStyle.hover}`}
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-          aria-label={
-            resolvedTheme === "dark"
-              ? "Switch to light mode"
-              : "Switch to dark mode"
-          }
         >
           {resolvedTheme === "dark" ? (
             <MoonIcon className="size-4" />
@@ -49,7 +44,6 @@ export function FabActions() {
               "Hi, I need help with my payment."
             )
           }
-          aria-label="Get support"
         >
           <HelpCircleIcon className="size-4" />
         </button>

@@ -1,106 +1,99 @@
-import { getAddress, isAddress } from "viem";
-import { baseUSDC } from "../constants";
 import type { EthereumParseResult } from "../types";
-import { createTransactionMessage } from "../utils";
 
-export function parseEthereum(input: string): EthereumParseResult | null {
-  if (!input.startsWith("ethereum:")) {
+export function parseEthereum(uri: string): EthereumParseResult | null {
+  if (!uri.startsWith("ethereum:")) {
     return null;
   }
 
-  const uri = input.substring(9);
-  const [path, queryString] = uri.split("?");
-  const params = new URLSearchParams(queryString || "");
+  const withoutScheme = uri.slice("ethereum:".length);
+  const [targetAndChain, queryString] = withoutScheme.split("?");
+  const [targetPart, maybeChainId] = targetAndChain.split("@");
 
-  const [pathWithoutFunction, functionName] = path.split("/");
-  const [targetAddress, chainIdStr] = pathWithoutFunction.split("@");
+  let contractAddress: string | undefined = undefined;
+  let functionName: string | undefined = undefined;
+  let recipient: string | undefined = undefined;
+  let chainId: string | number | undefined = undefined;
 
-  if (!isAddress(targetAddress)) {
-    return {
-      type: "ethereum",
-      message: "Error: Invalid Ethereum URI - invalid target address",
-    };
+  if (targetPart.includes("/")) {
+    const [contract, func] = targetPart.split("/");
+    contractAddress = contract;
+    functionName = func;
+  } else if (/^0x[a-fA-F0-9]{40}$/.test(targetPart)) {
+    recipient = targetPart;
+  }
+
+  if (maybeChainId) {
+    chainId = maybeChainId.startsWith("0x")
+      ? parseInt(maybeChainId, 16)
+      : parseInt(maybeChainId, 10);
+  }
+
+  const parameters: Record<string, string> = {};
+  if (queryString) {
+    const pairs = queryString.split("&");
+    for (const pair of pairs) {
+      const [key, value] = pair.split("=");
+      if (key && value) {
+        parameters[key] = decodeURIComponent(value);
+      }
+    }
   }
 
   const result: EthereumParseResult = {
     type: "ethereum",
-    address: getAddress(targetAddress),
-    chain_id: chainIdStr ? Number.parseInt(chainIdStr, 10) : baseUSDC.chainId,
-    message: "Ethereum request",
-    asset: {
-      contract: getAddress(baseUSDC.token),
-    },
+    message: "Parsed Ethereum URI",
+    address: recipient,
+    chain_id: chainId,
+    extra_params: {},
   };
+
+  if (contractAddress) {
+    result.asset = { contract: contractAddress };
+  }
+
+  if (parameters.value) {
+    result.amount = parameters.value;
+  }
+
+  if (!result.amount && parameters.uint256) {
+    result.amount = parameters.uint256;
+  }
 
   if (functionName) {
-    return parseContractCall(result, functionName, params);
+    result.operation = functionName.toLowerCase();
   }
 
-  return parseNativeTransfer(result, params);
-}
+  if (parameters.address && /^0x[a-fA-F0-9]{40}$/.test(parameters.address)) {
+    result.address = parameters.address;
+  }
 
-function parseContractCall(
-  baseResult: EthereumParseResult,
-  functionName: string,
-  params: URLSearchParams
-): EthereumParseResult {
-  const result: EthereumParseResult = {
-    ...baseResult,
-    operation: functionName.toLowerCase(),
+  result.fee = {
+    gasLimit: parameters.gas || parameters.gasLimit,
+    gasPrice: parameters.gasPrice,
+    maxFeePerGas: parameters.maxFeePerGas,
+    maxPriorityFeePerGas: parameters.maxPriorityFeePerGas,
   };
 
-  if (result.operation === "transfer") {
-    const recipient = params.get("address")?.trim();
-    const amount = params.get("uint256")?.trim();
+  result.raw = {
+    data: parameters.data,
+  };
 
-    if (recipient && isAddress(recipient)) {
-      result.asset = { contract: result.address };
-      result.address = getAddress(recipient);
-      result.amount = amount;
-      result.message = createTransactionMessage(
-        "ethereum",
-        "transfer",
-        amount,
-        { code: "TOKEN" },
-        undefined
-      );
-    } else {
-      result.message =
-        "Error: Invalid ERC20 transfer - missing or invalid recipient";
+  // Move all unused parameters to extra_params
+  for (const [key, value] of Object.entries(parameters)) {
+    if (
+      ![
+        "value",
+        "gas",
+        "gasLimit",
+        "gasPrice",
+        "maxFeePerGas",
+        "maxPriorityFeePerGas",
+        "data",
+        "address",
+      ].includes(key)
+    ) {
+      result.extra_params![key] = value;
     }
-  } else {
-    result.message = `Contract call to ${functionName}`;
-    const extra_params: Record<string, string> = {};
-    for (const [key, value] of Array.from(params.entries())) {
-      extra_params[key] = value;
-    }
-    if (Object.keys(extra_params).length > 0) {
-      result.extra_params = extra_params;
-    }
-  }
-
-  return result;
-}
-
-function parseNativeTransfer(
-  baseResult: EthereumParseResult,
-  params: URLSearchParams
-): EthereumParseResult {
-  const result = { ...baseResult };
-  const amount = params.get("value")?.trim();
-
-  if (amount) {
-    result.operation = "transfer";
-    result.amount = amount;
-    result.message = createTransactionMessage(
-      "ethereum",
-      "transfer",
-      amount,
-      { code: "ETH" },
-      undefined
-    );
-  } else {
-    result.message = "Ethereum address";
   }
 
   return result;

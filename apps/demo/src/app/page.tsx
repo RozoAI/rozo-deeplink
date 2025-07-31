@@ -5,7 +5,6 @@ import { Button } from "@demo/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@demo/components/ui/card";
@@ -19,7 +18,12 @@ import {
 } from "@demo/components/ui/sheet";
 import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
 import { ScanQr } from "@rozoai/deeplink-react";
+import JsonView from "@uiw/react-json-view";
+import { darkTheme } from "@uiw/react-json-view/dark";
+import { lightTheme } from "@uiw/react-json-view/light";
+import packageJson from "apps/demo/package.json";
 import { FileCode, Globe, QrCode, SquareCode } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -27,6 +31,7 @@ export default function DeeplinkParserPage() {
   const [inputValue, setInputValue] = useState("");
   const [parsedData, setParsedData] = useState<DeeplinkData | null>(null);
   const [isSheetOpen, setSheetOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const handleParse = () => {
     if (!inputValue) {
@@ -78,6 +83,11 @@ export default function DeeplinkParserPage() {
         <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
           Paste a deeplink below or scan a QR code to parse it.
         </p>
+        <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
+          Deeplink Core: {packageJson.dependencies["@rozoai/deeplink-core"]}
+          <br />
+          Deeplink React: {packageJson.dependencies["@rozoai/deeplink-react"]}
+        </p>
         <div className="flex space-x-2 mb-4 w-full">
           <Input
             type="text"
@@ -120,13 +130,14 @@ export default function DeeplinkParserPage() {
           <Card className="w-full">
             <CardHeader>
               <div className="flex items-center space-x-2">
-                {getIcon(parsedData.type)}
                 <CardTitle className="capitalize">{parsedData.type}</CardTitle>
               </div>
-              <CardDescription>Parsed data from the deeplink</CardDescription>
             </CardHeader>
             <CardContent>
-              <ParsedDataViewer data={parsedData} />
+              <JsonView
+                value={parsedData}
+                style={resolvedTheme === "dark" ? darkTheme : lightTheme}
+              />
             </CardContent>
           </Card>
         )}

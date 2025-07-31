@@ -5,7 +5,10 @@
     "build": "pnpm --filter=\"./packages/*\" build",
     "dev": "pnpm --filter=demo dev",
     "test": "pnpm --filter=\"./packages/*\" test",
-    "clean": "pnpm -r clean && rm -rf node_modules"
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "lint": "pnpm --filter=\"./packages/*\" lint",
+    "lint:fix": "pnpm --filter=\"./packages/*\" lint:fix",
+    "type-check": "pnpm --filter=\"./packages/*\" type-check"
   },
   "devDependencies": {
     "bumpp": "^10.2.0",

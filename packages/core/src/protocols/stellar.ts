@@ -95,7 +95,7 @@ function parsePayOperation(params: URLSearchParams): StellarParseResult {
     "payment",
     result.amount,
     result.asset,
-    result.msg
+    result.message
   );
 
   return result;
@@ -116,14 +116,18 @@ function parseTxOperation(params: URLSearchParams): StellarParseResult {
   const result: StellarParseResult = {
     type: "stellar",
     operation: "tx",
-    xdr: xdr,
+    raw: {
+      xdr,
+    },
     message: "Stellar transaction request",
   };
 
   // Optional replace parameter (specific to tx operation)
   const replace = params.get("replace")?.trim();
   if (replace) {
-    result.replace = replace;
+    result.extra_params = {
+      replace,
+    };
   }
 
   // Add common parameters
@@ -135,7 +139,7 @@ function parseTxOperation(params: URLSearchParams): StellarParseResult {
     "transaction",
     undefined,
     undefined,
-    result.msg
+    result.message
   );
 
   return result;
@@ -166,7 +170,7 @@ function addCommonParameters(
   // Optional message
   const msg = params.get("msg")?.trim();
   if (msg) {
-    result.msg = msg;
+    result.message = msg;
   }
 
   // Optional network passphrase

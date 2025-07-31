@@ -8,7 +8,9 @@ export function parseWebsite(input: string): DeeplinkData | null {
         url: input,
       };
     }
-  } catch {}
+  } catch {
+    return null;
+  }
 
   return null;
 }

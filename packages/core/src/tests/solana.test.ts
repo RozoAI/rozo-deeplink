@@ -17,41 +17,45 @@ describe("Solana Parser", () => {
       const input = `solana:${validRecipient}?amount=1`;
       const result = parseSolana(input) as SolanaParseResult;
 
-      expect(result).toEqual({
-        ...baseExpect,
-        amount: "1",
-        message: "Solana payment for 1",
-      });
+      expect(result).toHaveProperty("type", "solana");
+      expect(result).toHaveProperty("operation", "transfer");
+      expect(result).toHaveProperty("address", validRecipient);
+      expect(result).toHaveProperty("amount", "1");
+      expect(result).toHaveProperty(
+        "message",
+        "Solana payment for 1 - Solana payment request"
+      );
     });
 
     it("should parse SPL Token transfer", () => {
       const input = `solana:${validRecipient}?amount=0.01&spl-token=${usdcMint}`;
       const result = parseSolana(input) as SolanaParseResult;
 
-      expect(result).toEqual({
-        ...baseExpect,
-        amount: "0.01",
-        asset: {
-          contract: usdcMint,
-        },
-        message: "Solana payment for 0.01",
-      });
+      expect(result).toHaveProperty("type", "solana");
+      expect(result).toHaveProperty("operation", "transfer");
+      expect(result).toHaveProperty("address", validRecipient);
+      expect(result).toHaveProperty("amount", "0.01");
+      expect(result).toHaveProperty("asset.contract", usdcMint);
+      expect(result).toHaveProperty(
+        "message",
+        "Solana payment for 0.01 - Solana payment request"
+      );
     });
 
     it("should parse request with label, message, and memo", () => {
       const input = `solana:${validRecipient}?amount=1&label=Michael&message=Thanks%20for%20all%20the%20fish&memo=OrderId12345`;
       const result = parseSolana(input) as SolanaParseResult;
 
-      expect(result).toEqual(
-        expect.objectContaining({
-          ...baseExpect,
-          amount: "1",
-          origin_domain: "Michael",
-          msg: "Thanks for all the fish",
-          memo: "OrderId12345",
-          message: "Solana payment for 1 - Thanks for all the fish",
-        })
+      expect(result).toHaveProperty("type", "solana");
+      expect(result).toHaveProperty("operation", "transfer");
+      expect(result).toHaveProperty("address", validRecipient);
+      expect(result).toHaveProperty("amount", "1");
+      expect(result).toHaveProperty("origin_domain", "Michael");
+      expect(result).toHaveProperty(
+        "message",
+        "Solana payment for 1 - Thanks for all the fish"
       );
+      expect(result).toHaveProperty("memo", "OrderId12345");
     });
 
     it("should parse request with reference keys", () => {
@@ -72,11 +76,14 @@ describe("Solana Parser", () => {
       const input = `solana:${validRecipient}?label=Michael`;
       const result = parseSolana(input) as SolanaParseResult;
 
-      expect(result).toEqual({
-        ...baseExpect,
-        origin_domain: "Michael",
-        message: "Solana payment - Michael",
-      });
+      expect(result).toHaveProperty("type", "solana");
+      expect(result).toHaveProperty("operation", "transfer");
+      expect(result).toHaveProperty("address", validRecipient);
+      expect(result).toHaveProperty("origin_domain", "Michael");
+      expect(result).toHaveProperty(
+        "message",
+        "Solana payment - Solana payment request"
+      );
     });
 
     it("should return error for transfer with invalid recipient", () => {

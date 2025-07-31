@@ -11,7 +11,7 @@ export function parseSolana(input: string): SolanaParseResult | null {
       if (decodedUrl.startsWith("https://")) {
         return parseTransactionRequest(decodedUrl);
       }
-    } catch (e) {
+    } catch {
       // Not a valid URI component, proceed as a transfer request
     }
 
@@ -37,7 +37,7 @@ export function isValidSolanaAddress(address: string): boolean {
     // While isOnCurve is a good check, some valid accounts are not on the curve.
     // For the purpose of a recipient address, a valid public key format is sufficient.
     return !!publicKey;
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -80,7 +80,7 @@ function parseTransferRequest(urlPart: string): SolanaParseResult | null {
 
   const message = params.get("message")?.trim();
   if (message) {
-    result.msg = message;
+    result.message = message;
   }
 
   const memo = params.get("memo")?.trim();
@@ -108,7 +108,7 @@ function parseTransferRequest(urlPart: string): SolanaParseResult | null {
     "payment",
     result.amount,
     result.asset,
-    result.msg || result.origin_domain
+    result.message || result.origin_domain
   );
 
   return result;
@@ -125,7 +125,7 @@ function parseTransactionRequest(link: string): SolanaParseResult {
   try {
     const url = new URL(link);
     result.message = `Transaction request from ${url.hostname}`;
-  } catch (error) {
+  } catch {
     // Keep generic message if URL is somehow invalid despite checks
   }
 

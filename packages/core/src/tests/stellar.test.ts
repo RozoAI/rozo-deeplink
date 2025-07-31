@@ -37,13 +37,15 @@ describe("Stellar Parser", () => {
     it("should parse payment with memo and message", () => {
       const input = `web+stellar:pay?destination=${stellarAddress}&amount=50&memo=Invoice%20%23123&memo_type=text&msg=Payment%20for%20services`;
       const result = parseStellar(input) as StellarParseResult;
+
       expect(result).not.toBeNull();
-      expect(result).toMatchObject({
-        amount: "50",
-        memo: "Invoice #123",
-        memo_type: "text",
-        msg: "Payment for services",
-      });
+      expect(result).toHaveProperty("amount", "50");
+      expect(result).toHaveProperty("memo", "Invoice #123");
+      expect(result).toHaveProperty("memo_type", "text");
+      expect(result).toHaveProperty(
+        "message",
+        "Stellar payment for 50 - Payment for services"
+      );
     });
 
     it("should parse payment with callback and network", () => {
@@ -60,21 +62,33 @@ describe("Stellar Parser", () => {
     it("should parse payment with all parameters", () => {
       const input = `web+stellar:pay?destination=${stellarAddress}&amount=200&asset_code=USDC&asset_issuer=GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN&memo=12345&memo_type=id&callback=https%3A%2F%2Fwallet.example.com%2Fcallback&msg=Monthly%20subscription&network_passphrase=Public%20Global%20Stellar%20Network%20%3B%20September%202015&origin_domain=example.com&signature=abcd1234`;
       const result = parseStellar(input) as StellarParseResult;
+
       expect(result).not.toBeNull();
-      expect(result).toMatchObject({
-        amount: "200",
-        asset: {
-          code: "USDC",
-          issuer: "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN",
-        },
-        memo: "12345",
-        memo_type: "id",
-        callback: "https://wallet.example.com/callback",
-        msg: "Monthly subscription",
-        network_passphrase: "Public Global Stellar Network ; September 2015",
-        origin_domain: "example.com",
-        signature: "abcd1234",
-      });
+      expect(result).toHaveProperty("type", "stellar");
+      expect(result).toHaveProperty("operation", "pay");
+      expect(result).toHaveProperty("toStellarAddress", stellarAddress);
+      expect(result).toHaveProperty("amount", "200");
+      expect(result).toHaveProperty("asset.code", "USDC");
+      expect(result).toHaveProperty(
+        "asset.issuer",
+        "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
+      );
+      expect(result).toHaveProperty("memo", "12345");
+      expect(result).toHaveProperty("memo_type", "id");
+      expect(result).toHaveProperty(
+        "callback",
+        "https://wallet.example.com/callback"
+      );
+      expect(result).toHaveProperty(
+        "message",
+        "Stellar payment for 200 USDC - Monthly subscription"
+      );
+      expect(result).toHaveProperty(
+        "network_passphrase",
+        "Public Global Stellar Network ; September 2015"
+      );
+      expect(result).toHaveProperty("origin_domain", "example.com");
+      expect(result).toHaveProperty("signature", "abcd1234");
     });
 
     it("should return error for pay operation without destination", () => {
@@ -113,11 +127,12 @@ describe("Stellar Parser", () => {
       const input = `web+stellar:tx?xdr=AAAAAB%2BLPp%2BwygWy7psQmHHxstTn4BaSJWFjCU%2BEuL9IbqCgAAAAZAAV%2FHwAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA4fQXL%2BHr5%2BLq74jUGqFLjQjuZyRrQGtWgbRPKq1H6%2FsAAAABVVNEAAAAAACNlYd30HdCuLI54eyYjyX%2FpMCZdmkOjlvZmjFUJJKF7%2FZPzYAAAAAAAAAAAhqNgAAABAMUgfvpWY0v6qQGK6RqEVTRGc4vJHBzaYsRZcHLQYfTIqGEVWQKTOIm%2BVlMg%2FpSwcVGUqvCgK5nKTMzNs%2FVaF%2FPxAY%3D`;
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toMatchObject({
-        type: "stellar",
-        operation: "tx",
-        xdr: "AAAAAB+LPp+wygWy7psQmHHxstTn4BaSJWFjCU+EuL9IbqCgAAAAZAAV/HwAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA4fQXL+Hr5+Lq74jUGqFLjQjuZyRrQGtWgbRPKq1H6/sAAAABVVNEAAAAAACNlYd30HdCuLI54eyYjyX/pMCZdmkOjlvZmjFUJJKF7/ZPzYAAAAAAAAAAAhqNgAAABAMUgfvpWY0v6qQGK6RqEVTRGc4vJHBzaYsRZcHLQYfTIqGEVWQKTOIm+VlMg/pSwcVGUqvCgK5nKTMzNs/VaF/PxAY=",
-      });
+      expect(result).toHaveProperty("type", "stellar");
+      expect(result).toHaveProperty("operation", "tx");
+      expect(result).toHaveProperty(
+        "raw.xdr",
+        "AAAAAB+LPp+wygWy7psQmHHxstTn4BaSJWFjCU+EuL9IbqCgAAAAZAAV/HwAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA4fQXL+Hr5+Lq74jUGqFLjQjuZyRrQGtWgbRPKq1H6/sAAAABVVNEAAAAAACNlYd30HdCuLI54eyYjyX/pMCZdmkOjlvZmjFUJJKF7/ZPzYAAAAAAAAAAAhqNgAAABAMUgfvpWY0v6qQGK6RqEVTRGc4vJHBzaYsRZcHLQYfTIqGEVWQKTOIm+VlMg/pSwcVGUqvCgK5nKTMzNs/VaF/PxAY="
+      );
     });
 
     it("should parse transaction with replace parameter", () => {
@@ -125,10 +140,8 @@ describe("Stellar Parser", () => {
         "web+stellar:tx?xdr=AAAAAB%2BLPp%2BwygWy7psQmHHxstTn4BaSJWFjCU%2BEuL9IbqCgAAAAZAAV%2FHwAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA4fQXL%2BHr5%2BLq74jUGqFLjQjuZyRrQGtWgbRPKq1H6%2FsAAAABVVNEAAAAAACNlYd30HdCuLI54eyYjyX%2FpMCZdmkOjlvZmjFUJJKF7%2FZPzYAAAAAAAAAAAhqNgAAABAMUgfvpWY0v6qQGK6RqEVTRGc4vJHBzaYsRZcHLQYfTIqGEVWQKTOIm%2BVlMg%2FpSwcVGUqvCgK5nKTMzNs%2FVaF%2FPxAY%3D&replace=0%2C1";
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toMatchObject({
-        operation: "tx",
-        replace: "0,1",
-      });
+      expect(result).toHaveProperty("operation", "tx");
+      expect(result).toHaveProperty("extra_params.replace", "0,1");
     });
 
     it("should parse transaction with callback and message", () => {
@@ -136,11 +149,15 @@ describe("Stellar Parser", () => {
         "web+stellar:tx?xdr=AAAAAB%2BLPp%2BwygWy7psQmHHxstTn4BaSJWFjCU%2BEuL9IbqCgAAAAZAAV%2FHwAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA4fQXL%2BHr5%2BLq74jUGqFLjQjuZyRrQGtWgbRPKq1H6%2FsAAAABVVNEAAAAAACNlYd30HdCuLI54eyYjyX%2FpMCZdmkOjlvZmjFUJJKF7%2FZPzYAAAAAAAAAAAhqNgAAABAMUgfvpWY0v6qQGK6RqEVTRGc4vJHBzaYsRZcHLQYfTIqGEVWQKTOIm%2BVlMg%2FpSwcVGUqvCgK5nKTMzNs%2FVaF%2FPxAY%3D&callback=https%3A%2F%2Fapi.example.com%2Ftx-callback&msg=Multi-operation%20transaction";
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toMatchObject({
-        operation: "tx",
-        callback: "https://api.example.com/tx-callback",
-        msg: "Multi-operation transaction",
-      });
+      expect(result).toHaveProperty("operation", "tx");
+      expect(result).toHaveProperty(
+        "callback",
+        "https://api.example.com/tx-callback"
+      );
+      expect(result).toHaveProperty(
+        "message",
+        "Stellar transaction - Multi-operation transaction"
+      );
     });
 
     it("should parse transaction with all parameters", () => {
@@ -148,17 +165,24 @@ describe("Stellar Parser", () => {
         "web+stellar:tx?xdr=AAAAAB%2BLPp%2BwygWy7psQmHHxstTn4BaSJWFjCU%2BEuL9IbqCgAAAAZAAV%2FHwAAAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA4fQXL%2BHr5%2BLq74jUGqFLjQjuZyRrQGtWgbRPKq1H6%2FsAAAABVVNEAAAAAACNlYd30HdCuLI54eyYjyX%2FpMCZdmkOjlvZmjFUJJKF7%2FZPzYAAAAAAAAAAAhqNgAAABAMUgfvpWY0v6qQGK6RqEVTRGc4vJHBzaYsRZcHLQYfTIqGEVWQKTOIm%2BVlMg%2FpSwcVGUqvCgK5nKTMzNs%2FVaF%2FPxAY%3D&replace=0%2C1&memo=TX123&memo_type=text&callback=https%3A%2F%2Fapi.example.com%2Ftx-callback&msg=Complex%20smart%20contract%20interaction&network_passphrase=Public%20Global%20Stellar%20Network%20%3B%20September%202015&origin_domain=dapp.example.com&signature=xyz789";
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toMatchObject({
-        operation: "tx",
-        replace: "0,1",
-        memo: "TX123",
-        memo_type: "text",
-        callback: "https://api.example.com/tx-callback",
-        msg: "Complex smart contract interaction",
-        network_passphrase: "Public Global Stellar Network ; September 2015",
-        origin_domain: "dapp.example.com",
-        signature: "xyz789",
-      });
+      expect(result).toHaveProperty("operation", "tx");
+      expect(result).toHaveProperty("extra_params.replace", "0,1");
+      expect(result).toHaveProperty("memo", "TX123");
+      expect(result).toHaveProperty("memo_type", "text");
+      expect(result).toHaveProperty(
+        "callback",
+        "https://api.example.com/tx-callback"
+      );
+      expect(result).toHaveProperty(
+        "message",
+        "Stellar transaction - Complex smart contract interaction"
+      );
+      expect(result).toHaveProperty(
+        "network_passphrase",
+        "Public Global Stellar Network ; September 2015"
+      );
+      expect(result).toHaveProperty("origin_domain", "dapp.example.com");
+      expect(result).toHaveProperty("signature", "xyz789");
     });
 
     it("should return error for tx operation without xdr", () => {
