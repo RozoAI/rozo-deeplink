@@ -22,7 +22,7 @@ import JsonView from "@uiw/react-json-view";
 import { darkTheme } from "@uiw/react-json-view/dark";
 import { lightTheme } from "@uiw/react-json-view/light";
 import packageJson from "apps/demo/package.json";
-import { FileCode, Globe, QrCode, SquareCode } from "lucide-react";
+import { QrCode } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -61,19 +61,6 @@ export default function DeeplinkParserPage() {
     setSheetOpen(false);
   };
 
-  const getIcon = (type: DeeplinkData["type"]) => {
-    switch (type) {
-      case "ethereum":
-        return <FileCode className="w-6 h-6" />;
-      case "solana":
-        return <SquareCode className="w-6 h-6" />;
-      case "stellar":
-        return <Globe className="w-6 h-6" />;
-      default:
-        return <FileCode className="w-6 h-6" />;
-    }
-  };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="w-full max-w-2xl flex-1 flex flex-col items-center justify-center gap-4">
@@ -83,11 +70,14 @@ export default function DeeplinkParserPage() {
         <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
           Paste a deeplink below or scan a QR code to parse it.
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
-          Deeplink Core: {packageJson.dependencies["@rozoai/deeplink-core"]}
-          <br />
-          Deeplink React: {packageJson.dependencies["@rozoai/deeplink-react"]}
-        </p>
+        <div className="flex flex-row gap-2 items-center justify-center divide-x divide-gray-200 dark:divide-gray-600">
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-6 pr-2">
+            Deeplink Core: {packageJson.dependencies["@rozoai/deeplink-core"]}
+          </p>
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
+            Deeplink React: {packageJson.dependencies["@rozoai/deeplink-react"]}
+          </p>
+        </div>
         <div className="flex space-x-2 mb-4 w-full">
           <Input
             type="text"

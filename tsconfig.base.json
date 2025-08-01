@@ -2,9 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@demo/*": ["apps/demo/src/*"],
-      "@rozoai/deeplink-core": ["./packages/core/src/index.ts"],
-      "@rozoai/deeplink-react": ["./packages/scan-qr/src/index.tsx"]
+      "@demo/*": ["apps/demo/src/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

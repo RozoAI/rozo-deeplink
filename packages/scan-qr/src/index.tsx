@@ -2,9 +2,9 @@
 
 import { parseDeeplink, type DeeplinkData } from "@rozoai/deeplink-core";
 import {
-  type IDetectedBarcode,
   IScannerProps,
   Scanner,
+  type IDetectedBarcode,
 } from "@yudiel/react-qr-scanner";
 
 interface ScanQRProps extends Omit<IScannerProps, "onScan" | "onError"> {
@@ -27,11 +27,7 @@ interface ScanQRProps extends Omit<IScannerProps, "onScan" | "onError"> {
   className?: string;
 }
 
-export const ScanQr = ({
-  onScan,
-  onError,
-  ...props
-}: ScanQRProps) => {
+export const ScanQr = ({ onScan, onError, ...props }: ScanQRProps) => {
   const handleScan = (detectedCodes: IDetectedBarcode[]) => {
     if (detectedCodes.length === 0) return;
 
@@ -58,11 +54,5 @@ export const ScanQr = ({
     }
   };
 
-  return (
-    <Scanner
-      onScan={handleScan}
-      onError={handleError}
-      {...props}
-    />
-  );
+  return <Scanner onScan={handleScan} onError={handleError} {...props} />;
 };

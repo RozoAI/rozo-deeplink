@@ -27,11 +27,11 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.9)(react@19.1.0)
       '@rozoai/deeplink-core':
-        specifier: 1.0.7
-        version: 1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
+        specifier: 1.0.8
+        version: 1.0.8(typescript@5.8.3)
       '@rozoai/deeplink-react':
-        specifier: 1.0.5
-        version: 1.0.5(@types/emscripten@1.40.1)(bufferutil@4.0.9)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)
+        specifier: 1.0.8
+        version: 1.0.8(@yudiel/react-qr-scanner@2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
       '@uiw/react-json-view':
         specifier: 2.0.0-alpha.33
         version: 2.0.0-alpha.33(@babel/runtime@7.28.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -158,8 +158,8 @@ importers:
   packages/scan-qr:
     dependencies:
       '@rozoai/deeplink-core':
-        specifier: 1.0.7
-        version: 1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
+        specifier: 1.0.8
+        version: 1.0.8(typescript@5.8.3)
       '@yudiel/react-qr-scanner':
         specifier: ^2.3.1
         version: 2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1096,12 +1096,13 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rozoai/deeplink-core@1.0.7':
-    resolution: {integrity: sha512-bQdHUwR4xgjbMqH0drqCPR19fN/rd+mbBJpQBs6A+ZUfgleJdyReDV8x0/jwvgIFj35GO9zzZxuryZj9D7Atwg==}
+  '@rozoai/deeplink-core@1.0.8':
+    resolution: {integrity: sha512-fi7c5lfDeRMaQYle2KK+/izfTqolUPwOXHuSDkJMi6b1Z1pjOHjH62USme9qBcTE8XUxrr8WCv9HNdrdIMXcoA==}
 
-  '@rozoai/deeplink-react@1.0.5':
-    resolution: {integrity: sha512-z8BuVwiQ1krARxWjciZN5pQpJKdnff2kHszSPN9YNNSqfGm1Oayv5V3U4dljs/IJozaOvMAqBZBA6h7ZrV36ig==}
+  '@rozoai/deeplink-react@1.0.8':
+    resolution: {integrity: sha512-b6nOvwVsAXqbrwE10IVf+YMrs7u7sE8gZZuqMfSU6jOO4QrsGYuqBUn9z1uXLMFzNaXWOxpsRQTMQ5Rui7hjpg==}
     peerDependencies:
+      '@yudiel/react-qr-scanner': ^2.3.1
       react: '>=18'
       react-dom: '>=18'
 
@@ -4606,7 +4607,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.46.2':
     optional: true
 
-  '@rozoai/deeplink-core@1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
+  '@rozoai/deeplink-core@1.0.8(typescript@5.8.3)':
     dependencies:
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@stellar/stellar-sdk': 12.3.0
@@ -4620,14 +4621,13 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@rozoai/deeplink-react@1.0.5(@types/emscripten@1.40.1)(bufferutil@4.0.9)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)':
+  '@rozoai/deeplink-react@1.0.8(@yudiel/react-qr-scanner@2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)':
     dependencies:
-      '@rozoai/deeplink-core': 1.0.7(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
+      '@rozoai/deeplink-core': 1.0.8(typescript@5.8.3)
       '@yudiel/react-qr-scanner': 2.3.1(@types/emscripten@1.40.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
     transitivePeerDependencies:
-      - '@types/emscripten'
       - bufferutil
       - debug
       - encoding

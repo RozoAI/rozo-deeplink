@@ -14,7 +14,7 @@ The DeepLink parser automatically detects and parses QR codes for:
 ## Quick Start
 
 ```typescript
-import { parseDeeplink } from "@/lib/deeplink";
+import { parseDeeplink } from "@rozoai/deeplink-core";
 
 // Parse any QR code string
 const result = parseDeeplink(qrCodeString);
@@ -172,7 +172,7 @@ export function parseBitcoin(input: string): DeeplinkData | null {
 ## Usage in Components
 
 ```typescript
-import { parseDeeplink } from "@/lib/deeplink";
+import { parseDeeplink } from "@rozoai/deeplink-core";
 
 function QRScanner() {
   const handleQRCode = (qrData: string) => {

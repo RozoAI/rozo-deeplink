@@ -1,7 +1,7 @@
+import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   build: {
@@ -16,6 +16,7 @@ export default defineConfig({
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "@yudiel/react-qr-scanner": "ReactQRScanner",
         },
       },
     },
@@ -27,9 +28,4 @@ export default defineConfig({
     }),
     react(),
   ],
-  resolve: {
-    alias: {
-      "@rozoai/deeplink-core": resolve(__dirname, "../core/dist"),
-    },
-  },
-}); 
+});

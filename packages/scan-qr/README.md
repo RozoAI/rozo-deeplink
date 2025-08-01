@@ -54,4 +54,4 @@ function MyComponent() {
 ## Related Packages
 
 - **[@rozoai/deeplink-core](../core)**: The core library for parsing deeplinks from various blockchain and payment protocols.
-- **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozoai/deeplink-core` and `@rozoai/deeplink-react`. 
+- **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozoai/deeplink-core` and `@rozoai/deeplink-react`.
