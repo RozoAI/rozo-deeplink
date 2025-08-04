@@ -1,11 +1,18 @@
 import type { EthereumParseResult } from "../types";
 
-export function parseEthereum(uri: string): EthereumParseResult | null {
-  if (!uri.startsWith("ethereum:")) {
+/**
+ * Parses an Ethereum URI according to EIP-681 specification.
+ *
+ * @see https://eips.ethereum.org/EIPS/eip-681
+ * @param input - The Ethereum URI to parse (e.g., "ethereum:0x1234...@1?value=1000")
+ * @returns Parsed Ethereum data or null if the URI is invalid
+ */
+export function parseEthereum(input: string): EthereumParseResult | null {
+  if (!input.startsWith("ethereum:")) {
     return null;
   }
 
-  const withoutScheme = uri.slice("ethereum:".length);
+  const withoutScheme = input.slice("ethereum:".length);
   const [targetAndChain, queryString] = withoutScheme.split("?");
   const [targetPart, maybeChainId] = targetAndChain.split("@");
 
@@ -44,7 +51,6 @@ export function parseEthereum(uri: string): EthereumParseResult | null {
     message: "Parsed Ethereum URI",
     address: recipient,
     chain_id: chainId,
-    extra_params: {},
   };
 
   if (contractAddress) {
@@ -74,11 +80,8 @@ export function parseEthereum(uri: string): EthereumParseResult | null {
     maxPriorityFeePerGas: parameters.maxPriorityFeePerGas,
   };
 
-  result.raw = {
-    data: parameters.data,
-  };
-
   // Move all unused parameters to extra_params
+  result.extra_params = {};
   for (const [key, value] of Object.entries(parameters)) {
     if (
       ![
@@ -88,13 +91,16 @@ export function parseEthereum(uri: string): EthereumParseResult | null {
         "gasPrice",
         "maxFeePerGas",
         "maxPriorityFeePerGas",
-        "data",
         "address",
       ].includes(key)
     ) {
       result.extra_params![key] = value;
     }
   }
+
+  result.raw = {
+    data: input,
+  };
 
   return result;
 }

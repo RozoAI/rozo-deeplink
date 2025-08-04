@@ -125,8 +125,12 @@ export default function DeeplinkParserPage() {
             </CardHeader>
             <CardContent>
               <JsonView
+                displayDataTypes={false}
                 value={parsedData}
-                style={resolvedTheme === "dark" ? darkTheme : lightTheme}
+                style={{
+                  ...(resolvedTheme === "dark" ? darkTheme : lightTheme),
+                  overflowWrap: "anywhere",
+                }}
               />
             </CardContent>
           </Card>

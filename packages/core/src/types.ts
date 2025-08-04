@@ -88,4 +88,5 @@ export type DeeplinkData =
   | EthereumParseResult
   | SolanaParseResult
   | WebsiteParseResult
-  | AddressParseResult;
+  | AddressParseResult
+  | BlockchainParseResult;

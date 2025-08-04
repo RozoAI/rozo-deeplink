@@ -3,6 +3,13 @@ import { baseUSDC, ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
 import { type StellarParseResult } from "../types";
 import { createTransactionMessage } from "../utils";
 
+/**
+ * Parses a Stellar URI and returns the appropriate StellarParseResult.
+ * Supports both SEP-0007 payment URI format (pay and tx operations) and plain Stellar address format.
+ *
+ * @param input - The Stellar URI to parse (e.g., "web+stellar:pay?destination=...")
+ * @returns Parsed Stellar data or null if the URI is invalid
+ */
 export function parseStellar(input: string): StellarParseResult | null {
   // Handle SEP-0007 payment URI format - both pay and tx operations
   const stellarUriRegex = /^web\+stellar:(pay|tx)\?(.+)$/;
@@ -14,9 +21,9 @@ export function parseStellar(input: string): StellarParseResult | null {
     const params = new URLSearchParams(queryString);
 
     if (operation === "pay") {
-      return parsePayOperation(params);
+      return parsePayOperation(params, input);
     } else if (operation === "tx") {
-      return parseTxOperation(params);
+      return parseTxOperation(params, input);
     }
   }
 
@@ -29,6 +36,9 @@ export function parseStellar(input: string): StellarParseResult | null {
     type: "stellar",
     address: input,
     message: "Stellar address",
+    raw: {
+      data: input,
+    },
   };
 }
 
@@ -36,7 +46,10 @@ export function isValidStellarAddress(address: string): boolean {
   return StrKey.isValidEd25519PublicKey(address);
 }
 
-function parsePayOperation(params: URLSearchParams): StellarParseResult {
+function parsePayOperation(
+  params: URLSearchParams,
+  raw: string
+): StellarParseResult {
   // Extract destination (required for pay operation)
   const destination = params.get("destination")?.trim();
   if (!destination) {
@@ -44,6 +57,9 @@ function parsePayOperation(params: URLSearchParams): StellarParseResult {
       type: "stellar",
       operation: "pay",
       message: "Error: Invalid Stellar payment URI - missing destination",
+      raw: {
+        data: raw,
+      },
     };
   }
 
@@ -53,6 +69,9 @@ function parsePayOperation(params: URLSearchParams): StellarParseResult {
       operation: "pay",
       message:
         "Error: Invalid Stellar payment URI - invalid destination address",
+      raw: {
+        data: raw,
+      },
     };
   }
 
@@ -66,6 +85,9 @@ function parsePayOperation(params: URLSearchParams): StellarParseResult {
     chain_id: baseUSDC.chainId,
     asset: {
       contract: baseUSDC.token,
+    },
+    raw: {
+      data: raw,
     },
   };
 
@@ -101,7 +123,10 @@ function parsePayOperation(params: URLSearchParams): StellarParseResult {
   return result;
 }
 
-function parseTxOperation(params: URLSearchParams): StellarParseResult {
+function parseTxOperation(
+  params: URLSearchParams,
+  raw: string
+): StellarParseResult {
   // Extract xdr (required for tx operation)
   const xdr = params.get("xdr")?.trim();
   if (!xdr) {
@@ -109,6 +134,9 @@ function parseTxOperation(params: URLSearchParams): StellarParseResult {
       type: "stellar",
       operation: "tx",
       message: "Error: Invalid Stellar transaction URI - missing XDR",
+      raw: {
+        data: raw,
+      },
     };
   }
 
@@ -118,6 +146,7 @@ function parseTxOperation(params: URLSearchParams): StellarParseResult {
     operation: "tx",
     raw: {
       xdr,
+      data: raw,
     },
     message: "Stellar transaction request",
   };

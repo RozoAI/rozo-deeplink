@@ -5,12 +5,22 @@ import { isValidSolanaAddress } from "../protocols/solana";
 import { isValidStellarAddress } from "../protocols/stellar";
 import type { DeeplinkData } from "../types";
 
+/**
+ * Parses an address string and returns the appropriate DeeplinkData.
+ * Supports Solana addresses, Stellar addresses, Ethereum URIs, and EVM addresses.
+ *
+ * @param input - The address string to parse (can be a plain address or URI format)
+ * @returns Parsed deeplink data or null if the input is not a valid address
+ */
 export function parseAddress(input: string): DeeplinkData | null {
   if (isValidSolanaAddress(input)) {
     return {
       type: "solana",
       address: input,
       message: "Detected Solana address.",
+      raw: {
+        data: input,
+      },
     };
   }
 
@@ -25,6 +35,9 @@ export function parseAddress(input: string): DeeplinkData | null {
         contract: getAddress(baseUSDC.token),
       },
       message: "Detected Stellar address. RozoPay will bridge to it.",
+      raw: {
+        data: input,
+      },
     };
   }
 
@@ -48,6 +61,9 @@ export function parseAddress(input: string): DeeplinkData | null {
           contract: getAddress(baseUSDC.token),
         },
         message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
+        raw: {
+          data: input,
+        },
       };
     }
   } catch {

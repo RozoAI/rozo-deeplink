@@ -2,6 +2,13 @@ import { PublicKey } from "@solana/web3.js";
 import type { SolanaParseResult } from "../types";
 import { createTransactionMessage } from "../utils";
 
+/**
+ * Parses a Solana URI and returns the appropriate SolanaParseResult.
+ * Supports both interactive transaction requests (HTTPS links) and non-interactive transfer requests.
+ *
+ * @param input - The Solana URI to parse (e.g., "solana:https://www.rozo.ai")
+ * @returns Parsed Solana data or null if the URI is invalid
+ */
 export function parseSolana(input: string): SolanaParseResult | null {
   if (input.startsWith("solana:")) {
     const urlPart = input.substring(7);
@@ -9,14 +16,14 @@ export function parseSolana(input: string): SolanaParseResult | null {
       // Check if it's an interactive transaction request (HTTPS link)
       const decodedUrl = decodeURIComponent(urlPart);
       if (decodedUrl.startsWith("https://")) {
-        return parseTransactionRequest(decodedUrl);
+        return parseTransactionRequest(decodedUrl, input);
       }
     } catch {
       // Not a valid URI component, proceed as a transfer request
     }
 
     // Assume it's a non-interactive transfer request
-    return parseTransferRequest(urlPart);
+    return parseTransferRequest(urlPart, input);
   }
 
   // Handle plain Solana address format
@@ -25,6 +32,9 @@ export function parseSolana(input: string): SolanaParseResult | null {
       type: "solana",
       address: input,
       message: "Solana address",
+      raw: {
+        data: input,
+      },
     };
   }
 
@@ -42,7 +52,10 @@ export function isValidSolanaAddress(address: string): boolean {
   }
 }
 
-function parseTransferRequest(urlPart: string): SolanaParseResult | null {
+function parseTransferRequest(
+  urlPart: string,
+  raw: string
+): SolanaParseResult | null {
   const [recipient, queryString] = urlPart.split("?");
 
   if (!isValidSolanaAddress(recipient)) {
@@ -50,6 +63,9 @@ function parseTransferRequest(urlPart: string): SolanaParseResult | null {
       type: "solana",
       operation: "transfer",
       message: "Error: Invalid Solana payment URI - invalid recipient address",
+      raw: {
+        data: raw,
+      },
     };
   }
 
@@ -59,6 +75,9 @@ function parseTransferRequest(urlPart: string): SolanaParseResult | null {
     operation: "transfer",
     address: recipient,
     message: "Solana payment request",
+    raw: {
+      data: raw,
+    },
   };
 
   const amount = params.get("amount")?.trim();
@@ -114,12 +133,15 @@ function parseTransferRequest(urlPart: string): SolanaParseResult | null {
   return result;
 }
 
-function parseTransactionRequest(link: string): SolanaParseResult {
+function parseTransactionRequest(link: string, raw: string): SolanaParseResult {
   const result: SolanaParseResult = {
     type: "solana",
     operation: "transaction",
     callback: link,
     message: "Solana transaction request",
+    raw: {
+      data: raw,
+    },
   };
 
   try {
