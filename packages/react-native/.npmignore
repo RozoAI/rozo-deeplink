@@ -1,0 +1,10 @@
+src/
+tsconfig.json
+.gitignore
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+node_modules/
+.DS_Store
+
