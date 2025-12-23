@@ -27,11 +27,11 @@ importers:
         specifier: ^1.2.3
         version: 1.2.4(@types/react@19.2.7)(react@19.1.0)
       '@rozoai/deeplink-core':
-        specifier: 1.0.9
-        version: 1.0.9(typescript@5.9.3)
+        specifier: 1.1.0
+        version: 1.1.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@rozoai/deeplink-react':
-        specifier: 1.0.9
-        version: 1.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)
+        specifier: 1.1.0
+        version: 1.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)
       '@uiw/react-json-view':
         specifier: 2.0.0-alpha.33
         version: 2.0.0-alpha.33(@babel/runtime@7.28.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1828,14 +1828,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rozoai/deeplink-core@1.0.9':
-    resolution: {integrity: sha512-0tSPRm9co6IOvDW77DdgJS0adSAADyXAwY/0oXcHIRewGXZksSMWwVdo8h0edMQH7djWtPpJLOC+1RgzQ/K1Aw==}
-
   '@rozoai/deeplink-core@1.1.0':
     resolution: {integrity: sha512-+Q1RaZGtKeTmSP0a+UAib+hwbwocOb3mDsIUr1EkQk2xclPFkqYbvoHP2Wxy/EpAJG4EDxsx57fCPn2qc+6v3g==}
 
-  '@rozoai/deeplink-react@1.0.9':
-    resolution: {integrity: sha512-/tkZzKjA8xw6KYlaBNAN2Ds7fhkw68fjZmKtvUkTzjW6v6TQeuO4jBIS7x6PTLQbvr98ehf0sutXvKPhxbTa0w==}
+  '@rozoai/deeplink-react@1.1.0':
+    resolution: {integrity: sha512-hcU2epM8pcBgyeL+8KsAidcHbvsQvRkS0W+PihS9SIHAGA+4hld/9R36zSgnrM2U3nyfGF4qWYSVoClgvbjZow==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -7617,21 +7614,6 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.54.0':
     optional: true
 
-  '@rozoai/deeplink-core@1.0.9(typescript@5.9.3)':
-    dependencies:
-      '@solana/web3.js': 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
-      '@stellar/stellar-sdk': 12.3.0
-      query-string: 9.3.1
-      viem: 2.43.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
-    transitivePeerDependencies:
-      - bare-url
-      - bufferutil
-      - debug
-      - encoding
-      - typescript
-      - utf-8-validate
-      - zod
-
   '@rozoai/deeplink-core@1.1.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/web3.js': 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -7647,9 +7629,9 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@rozoai/deeplink-react@1.0.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)':
+  '@rozoai/deeplink-react@1.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)':
     dependencies:
-      '@rozoai/deeplink-core': 1.0.9(typescript@5.9.3)
+      '@rozoai/deeplink-core': 1.1.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@yudiel/react-qr-scanner': 2.5.0(@types/emscripten@1.41.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
