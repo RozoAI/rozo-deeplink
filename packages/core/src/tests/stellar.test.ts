@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { baseUSDC } from "../constants";
 import { parseStellar } from "../protocols/stellar";
 import type { StellarParseResult } from "../types";
 
@@ -15,9 +14,8 @@ describe("Stellar Parser", () => {
       if (result) {
         expect(result).toHaveProperty("type", "stellar");
         expect(result).toHaveProperty("operation", "pay");
-        expect(result).toHaveProperty("toStellarAddress", stellarAddress);
+        expect(result).toHaveProperty("address", stellarAddress);
         expect(result).toHaveProperty("amount", "120.5");
-        expect(result).toHaveProperty("asset", { contract: baseUSDC.token });
       }
     });
 
@@ -42,10 +40,6 @@ describe("Stellar Parser", () => {
       expect(result).toHaveProperty("amount", "50");
       expect(result).toHaveProperty("memo", "Invoice #123");
       expect(result).toHaveProperty("memo_type", "text");
-      expect(result).toHaveProperty(
-        "message",
-        "Stellar payment for 50 - Payment for services"
-      );
     });
 
     it("should parse payment with callback and network", () => {
@@ -66,7 +60,7 @@ describe("Stellar Parser", () => {
       expect(result).not.toBeNull();
       expect(result).toHaveProperty("type", "stellar");
       expect(result).toHaveProperty("operation", "pay");
-      expect(result).toHaveProperty("toStellarAddress", stellarAddress);
+      expect(result).toHaveProperty("address", stellarAddress);
       expect(result).toHaveProperty("amount", "200");
       expect(result).toHaveProperty("asset.code", "USDC");
       expect(result).toHaveProperty(
@@ -80,10 +74,6 @@ describe("Stellar Parser", () => {
         "https://wallet.example.com/callback"
       );
       expect(result).toHaveProperty(
-        "message",
-        "Stellar payment for 200 USDC - Monthly subscription"
-      );
-      expect(result).toHaveProperty(
         "network_passphrase",
         "Public Global Stellar Network ; September 2015"
       );
@@ -95,20 +85,12 @@ describe("Stellar Parser", () => {
       const input = "web+stellar:pay?amount=100";
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toHaveProperty(
-        "message",
-        "Error: Invalid Stellar payment URI - missing destination"
-      );
     });
 
     it("should return error for pay operation with invalid destination", () => {
       const input = "web+stellar:pay?destination=INVALID_ADDRESS&amount=100";
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toHaveProperty(
-        "message",
-        "Error: Invalid Stellar payment URI - invalid destination address"
-      );
     });
 
     it("should handle extra parameters", () => {
@@ -154,10 +136,6 @@ describe("Stellar Parser", () => {
         "callback",
         "https://api.example.com/tx-callback"
       );
-      expect(result).toHaveProperty(
-        "message",
-        "Stellar transaction - Multi-operation transaction"
-      );
     });
 
     it("should parse transaction with all parameters", () => {
@@ -174,10 +152,6 @@ describe("Stellar Parser", () => {
         "https://api.example.com/tx-callback"
       );
       expect(result).toHaveProperty(
-        "message",
-        "Stellar transaction - Complex smart contract interaction"
-      );
-      expect(result).toHaveProperty(
         "network_passphrase",
         "Public Global Stellar Network ; September 2015"
       );
@@ -189,10 +163,6 @@ describe("Stellar Parser", () => {
       const input = "web+stellar:tx?callback=https://example.com";
       const result = parseStellar(input) as StellarParseResult;
       expect(result).not.toBeNull();
-      expect(result).toHaveProperty(
-        "message",
-        "Error: Invalid Stellar transaction URI - missing XDR"
-      );
     });
   });
 

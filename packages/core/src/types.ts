@@ -22,7 +22,7 @@ export interface BlockchainParseResult {
   operation?: Operation;
   address?: string;
   amount?: string;
-  message: string;
+  message?: string;
 
   asset?: AssetInfo;
 
@@ -69,7 +69,6 @@ export interface AddressParseResult extends BlockchainParseResult {
 export interface StellarParseResult extends BlockchainParseResult {
   type: "stellar";
   operation?: "pay" | "tx";
-  toStellarAddress?: string;
 }
 
 export interface EthereumParseResult extends BlockchainParseResult {

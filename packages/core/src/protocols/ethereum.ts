@@ -48,7 +48,6 @@ export function parseEthereum(input: string): EthereumParseResult | null {
 
   const result: EthereumParseResult = {
     type: "ethereum",
-    message: "Parsed Ethereum URI",
     address: recipient,
     chain_id: chainId,
   };

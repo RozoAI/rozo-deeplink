@@ -1,7 +1,5 @@
 import { StrKey } from "@stellar/stellar-sdk";
-import { baseUSDC, ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
 import { type StellarParseResult } from "../types";
-import { createTransactionMessage } from "../utils";
 
 /**
  * Parses a Stellar URI and returns the appropriate StellarParseResult.
@@ -35,7 +33,6 @@ export function parseStellar(input: string): StellarParseResult | null {
   return {
     type: "stellar",
     address: input,
-    message: "Stellar address",
     raw: {
       data: input,
     },
@@ -79,13 +76,7 @@ function parsePayOperation(
   const result: StellarParseResult = {
     type: "stellar",
     operation: "pay",
-    address: ROZO_MIDDLE_BASE_ADDRESS,
-    toStellarAddress: destination,
-    message: "Stellar payment request",
-    chain_id: baseUSDC.chainId,
-    asset: {
-      contract: baseUSDC.token,
-    },
+    address: destination,
     raw: {
       data: raw,
     },
@@ -110,15 +101,6 @@ function parsePayOperation(
 
   // Add common parameters
   addCommonParameters(result, params);
-
-  // Create a more descriptive message
-  result.message = createTransactionMessage(
-    "stellar",
-    "payment",
-    result.amount,
-    result.asset,
-    result.message
-  );
 
   return result;
 }
@@ -148,7 +130,6 @@ function parseTxOperation(
       xdr,
       data: raw,
     },
-    message: "Stellar transaction request",
   };
 
   // Optional replace parameter (specific to tx operation)
@@ -161,15 +142,6 @@ function parseTxOperation(
 
   // Add common parameters
   addCommonParameters(result, params);
-
-  // Create a more descriptive message
-  result.message = createTransactionMessage(
-    "stellar",
-    "transaction",
-    undefined,
-    undefined,
-    result.message
-  );
 
   return result;
 }
