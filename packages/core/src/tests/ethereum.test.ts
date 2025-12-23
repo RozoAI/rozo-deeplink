@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { baseUSDC } from "../constants";
 import { parseEthereum } from "../protocols/ethereum";
 import type { EthereumParseResult } from "../types";
 
@@ -37,7 +36,7 @@ describe("Ethereum Parser", () => {
 
   describe("EIP-681: ERC-20 Token Transfer", () => {
     it("should parse an ERC-20 transfer", () => {
-      const input = `ethereum:${baseUSDC.token}/transfer?address=${anotherAddress}&uint256=1e6`;
+      const input = `ethereum:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913/transfer?address=${anotherAddress}&uint256=1e6`;
       const result = parseEthereum(input) as EthereumParseResult;
 
       expect(result).toHaveProperty("type", "ethereum");
@@ -47,7 +46,7 @@ describe("Ethereum Parser", () => {
     });
 
     it("should handle missing recipient in ERC-20 transfer", () => {
-      const input = `ethereum:${baseUSDC.token}/transfer?uint256=1e6`;
+      const input = `ethereum:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913/transfer?uint256=1e6`;
       const result = parseEthereum(input) as EthereumParseResult;
       expect(result).toHaveProperty("operation", "transfer");
     });
@@ -76,7 +75,7 @@ describe("Ethereum Parser", () => {
     it("should return error for invalid target address in URI", () => {
       const input = "ethereum:invalid-address?value=1";
       const result = parseEthereum(input) as EthereumParseResult;
-      expect(result).toHaveProperty("message", "Parsed Ethereum URI");
+      expect(result).toHaveProperty("raw", { data: input });
     });
   });
 });

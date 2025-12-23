@@ -10,7 +10,9 @@ More info can refer to [QRSpec.md](https://github.com/RozoAI/rozo-deeplink/blob/
 
 - **[@rozoai/deeplink-core](./packages/core)**: The core library for parsing deeplinks from various blockchain and payment protocols. It supports Ethereum (EIP-681), Solana (Solana Pay), Stellar (SEP-7), and more.
 
-- **[@rozoai/deeplink-react](./packages/scan-qr)**: A React component for scanning QR codes. It uses `@rozoai/deeplink-core` to parse the scanned data and provides a simple interface for developers to integrate QR code scanning into their applications.
+- **[@rozoai/deeplink-react](./packages/scan-qr)**: A React component for scanning QR codes on the web. It uses `@rozoai/deeplink-core` to parse the scanned data and provides a simple interface for developers to integrate QR code scanning into their web applications.
+
+- **[@rozoai/deeplink-react-native](./packages/react-native)**: A React Native component for scanning QR codes in Expo and Bare React Native apps. It uses `expo-barcode-scanner` and `@rozoai/deeplink-core` to provide seamless QR code scanning for mobile applications.
 
 ## Demo
 
@@ -41,7 +43,7 @@ To get started with the demo application, follow these steps:
 
 2. **Build the packages:**
    ```bash
-   pnpm --filter @rozoai/deeplink-core --filter @rozoai/deeplink-react build
+   pnpm build
    ```
 
 3. **Run the development server:**

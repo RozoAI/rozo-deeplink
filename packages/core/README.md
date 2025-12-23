@@ -28,7 +28,7 @@ if (result) {
 ### Ethereum/EVM
 
 - **EIP-681 Payment Requests**: `ethereum:<contract_address>@<chain_id>/<function_name>?<params>`
-- **EVM Addresses**: `0x...` (defaults to Base network for USDC payments)
+- **EVM Addresses**: `0x...` (plain addresses without default chain or asset configuration)
 
 ### Solana
 
@@ -63,7 +63,7 @@ export interface BlockchainParseResult {
   operation?: string;
   address?: string;
   amount?: string;
-  message: string;
+  message?: string;
   asset?: {
     code?: string;
     issuer?: string;
@@ -80,7 +80,7 @@ export interface WebsiteParseResult {
 }
 ```
 
-For the full details of all fields, please refer to `lib/deeplink/types.ts`.
+For the full details of all fields, please refer to `src/types.ts`.
 
 ## Examples
 
@@ -93,22 +93,21 @@ parseDeeplink(
 // {
 //   type: "ethereum",
 //   operation: "transfer",
+//   address: "0xRecipient",
 //   asset: { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" },
 //   chain_id: 8453,
-//   recipients: [ { address: "0xRecipient", amount: "1000000" } ],
-//   message: "Ethereum transfer"
+//   amount: "1000000",
+//   raw: { data: "ethereum:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913@8453/transfer?address=0xRecipient&uint256=1000000" }
 // }
 
 // EVM Address
 parseDeeplink("0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6");
 // Returns:
 // {
-//   type: "address",
+//   type: "ethereum",
 //   address: "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6",
 //   operation: "transfer",
-//   chain_id: 8453,
-//   asset: { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" },
-//   message: "Detected EVM address. Please make sure you are sending to Base."
+//   raw: { data: "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6" }
 // }
 
 // Website
@@ -117,13 +116,26 @@ parseDeeplink("https://rozo.ai");
 
 // Solana Address
 parseDeeplink("7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU");
-// Returns: { type: "solana", address: "...", message: "Solana payment coming soon." }
+// Returns:
+// {
+//   type: "solana",
+//   address: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+//   raw: { data: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU" }
+// }
 
 // Stellar Payment Request
 parseDeeplink(
   "web+stellar:pay?destination=GC...&amount=100&asset_code=USDC&asset_issuer=GA..."
 );
-// Returns: { type: "stellar", operation: "pay", ... }
+// Returns:
+// {
+//   type: "stellar",
+//   operation: "pay",
+//   address: "GC...",
+//   amount: "100",
+//   asset: { code: "USDC", issuer: "GA..." },
+//   raw: { data: "web+stellar:pay?destination=GC...&amount=100&asset_code=USDC&asset_issuer=GA..." }
+// }
 ```
 
 ## Architecture
@@ -142,10 +154,10 @@ If no parser can handle the input, it returns `null`.
 
 To add support for a new blockchain:
 
-1. Create a new parser file (e.g., `bitcoin.ts`).
+1. Create a new parser file (e.g., `bitcoin.ts`) in `src/protocols/`.
 2. Implement and export a `parseBitcoin(input: string): DeeplinkData | null` function.
-3. Add your new parser to the `parsers` array in `lib/deeplink/index.ts`.
-4. Add your new result type to the `DeeplinkData` union in `lib/deeplink/types.ts`.
+3. Add your new parser to the `parsers` array in `src/index.ts`.
+4. Add your new result type to the `DeeplinkData` union in `src/types.ts`.
 
 ```typescript
 // Example: Adding Bitcoin support
@@ -156,7 +168,7 @@ export function parseBitcoin(input: string): DeeplinkData | null {
     return {
       type: "bitcoin",
       address: match[1],
-      message: "Bitcoin payment coming soon.",
+      raw: { data: input },
     };
   }
   return null;
@@ -202,4 +214,5 @@ function QRScanner() {
 ## Related Packages
 
 - **[@rozoai/deeplink-react](../scan-qr)**: A React component for scanning QR codes and parsing them with this library.
+- **[@rozoai/deeplink-react-native](../react-native)**: A React Native component for scanning QR codes with Expo support.
 - **[Demo Application](../../apps/demo)**: A Next.js application demonstrating the usage of `@rozoai/deeplink-core` and `@rozoai/deeplink-react`.

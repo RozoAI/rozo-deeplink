@@ -21,10 +21,6 @@ describe("Solana Parser", () => {
       expect(result).toHaveProperty("operation", "transfer");
       expect(result).toHaveProperty("address", validRecipient);
       expect(result).toHaveProperty("amount", "1");
-      expect(result).toHaveProperty(
-        "message",
-        "Solana payment for 1 - Solana payment request"
-      );
     });
 
     it("should parse SPL Token transfer", () => {
@@ -36,10 +32,6 @@ describe("Solana Parser", () => {
       expect(result).toHaveProperty("address", validRecipient);
       expect(result).toHaveProperty("amount", "0.01");
       expect(result).toHaveProperty("asset.contract", usdcMint);
-      expect(result).toHaveProperty(
-        "message",
-        "Solana payment for 0.01 - Solana payment request"
-      );
     });
 
     it("should parse request with label, message, and memo", () => {
@@ -51,10 +43,6 @@ describe("Solana Parser", () => {
       expect(result).toHaveProperty("address", validRecipient);
       expect(result).toHaveProperty("amount", "1");
       expect(result).toHaveProperty("origin_domain", "Michael");
-      expect(result).toHaveProperty(
-        "message",
-        "Solana payment for 1 - Thanks for all the fish"
-      );
       expect(result).toHaveProperty("memo", "OrderId12345");
     });
 
@@ -80,10 +68,6 @@ describe("Solana Parser", () => {
       expect(result).toHaveProperty("operation", "transfer");
       expect(result).toHaveProperty("address", validRecipient);
       expect(result).toHaveProperty("origin_domain", "Michael");
-      expect(result).toHaveProperty(
-        "message",
-        "Solana payment - Solana payment request"
-      );
     });
 
     it("should return error for transfer with invalid recipient", () => {
@@ -92,8 +76,9 @@ describe("Solana Parser", () => {
       expect(result).toEqual({
         type: "solana",
         operation: "transfer",
-        message:
-          "Error: Invalid Solana payment URI - invalid recipient address",
+        raw: {
+          data: input,
+        },
       });
     });
   });
@@ -108,7 +93,9 @@ describe("Solana Parser", () => {
         type: "solana",
         operation: "transaction",
         callback: link,
-        message: "Transaction request from example.com",
+        raw: {
+          data: input,
+        },
       });
     });
 
@@ -122,7 +109,9 @@ describe("Solana Parser", () => {
         type: "solana",
         operation: "transaction",
         callback: link,
-        message: "Transaction request from example.com",
+        raw: {
+          data: input,
+        },
       });
     });
   });
@@ -135,7 +124,9 @@ describe("Solana Parser", () => {
       expect(result).toEqual({
         type: "solana",
         address: validRecipient,
-        message: "Solana address",
+        raw: {
+          data: validRecipient,
+        },
       });
     });
 
@@ -173,12 +164,6 @@ describe("Solana Parser", () => {
       const result = parseSolana(input);
 
       expect(result).toBeNull();
-    });
-
-    it("should return null for malformed solana URI", () => {
-      const input = "solana:?amount=1";
-      const result = parseSolana(input);
-      expect(result?.message).toContain("invalid recipient address");
     });
   });
 });

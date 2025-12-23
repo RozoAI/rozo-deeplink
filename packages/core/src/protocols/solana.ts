@@ -1,6 +1,5 @@
 import { PublicKey } from "@solana/web3.js";
 import type { SolanaParseResult } from "../types";
-import { createTransactionMessage } from "../utils";
 
 /**
  * Parses a Solana URI and returns the appropriate SolanaParseResult.
@@ -31,7 +30,6 @@ export function parseSolana(input: string): SolanaParseResult | null {
     return {
       type: "solana",
       address: input,
-      message: "Solana address",
       raw: {
         data: input,
       },
@@ -62,7 +60,6 @@ function parseTransferRequest(
     return {
       type: "solana",
       operation: "transfer",
-      message: "Error: Invalid Solana payment URI - invalid recipient address",
       raw: {
         data: raw,
       },
@@ -74,7 +71,6 @@ function parseTransferRequest(
     type: "solana",
     operation: "transfer",
     address: recipient,
-    message: "Solana payment request",
     raw: {
       data: raw,
     },
@@ -99,7 +95,7 @@ function parseTransferRequest(
 
   const message = params.get("message")?.trim();
   if (message) {
-    result.message = message;
+    result.user_message = message;
   }
 
   const memo = params.get("memo")?.trim();
@@ -122,14 +118,6 @@ function parseTransferRequest(
     };
   }
 
-  result.message = createTransactionMessage(
-    "solana",
-    "payment",
-    result.amount,
-    result.asset,
-    result.message || result.origin_domain
-  );
-
   return result;
 }
 
@@ -138,18 +126,10 @@ function parseTransactionRequest(link: string, raw: string): SolanaParseResult {
     type: "solana",
     operation: "transaction",
     callback: link,
-    message: "Solana transaction request",
     raw: {
       data: raw,
     },
   };
-
-  try {
-    const url = new URL(link);
-    result.message = `Transaction request from ${url.hostname}`;
-  } catch {
-    // Keep generic message if URL is somehow invalid despite checks
-  }
 
   return result;
 }

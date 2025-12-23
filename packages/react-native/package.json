@@ -1,0 +1,62 @@
+{
+  "name": "@rozoai/deeplink-react-native",
+  "version": "1.1.0",
+  "description": "React Native component for scanning QR codes with Expo",
+  "repository": {
+    "type": "git",
+    "url": "github:RozoAI/rozo-deeplink"
+  },
+  "homepage": "https://rozo-deeplink-demo.vercel.app/",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "bumpp": "bumpp",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "qr",
+    "scanner",
+    "deeplink",
+    "rozoai",
+    "web3",
+    "solana",
+    "ethereum",
+    "stellar",
+    "crypto",
+    "barcode"
+  ],
+  "author": "Rozo AI",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.70",
+    "expo": ">=49",
+    "expo-camera": ">=15"
+  },
+  "dependencies": {
+    "@rozoai/deeplink-core": "1.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.8.3"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

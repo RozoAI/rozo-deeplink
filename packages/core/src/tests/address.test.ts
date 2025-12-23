@@ -9,9 +9,6 @@ describe("parseAddress", () => {
     if (!result) return;
     expect(result.type).toBe("ethereum");
     expect("address" in result ? result.address : "").toBe(input);
-    expect("message" in result ? result.message : "").toContain(
-      "Detected EVM address"
-    );
   });
 
   it("should correctly parse a valid Solana address", () => {
@@ -21,9 +18,6 @@ describe("parseAddress", () => {
     if (!result) return;
     expect(result.type).toBe("solana");
     expect("address" in result ? result.address : "").toBe(input);
-    expect("message" in result ? result.message : "").toContain(
-      "Detected Solana address"
-    );
   });
 
   it("should correctly parse a valid Stellar address", () => {
@@ -32,12 +26,7 @@ describe("parseAddress", () => {
     expect(result).not.toBeNull();
     if (!result) return;
     expect(result.type).toBe("stellar");
-    expect("toStellarAddress" in result ? result.toStellarAddress : "").toBe(
-      input
-    );
-    expect("message" in result ? result.message : "").toContain(
-      "Detected Stellar address"
-    );
+    expect("address" in result ? result.address : "").toBe(input);
   });
 
   it("should return null for an invalid address", () => {

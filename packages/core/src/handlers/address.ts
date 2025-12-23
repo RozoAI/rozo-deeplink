@@ -1,5 +1,4 @@
 import { getAddress, isAddress } from "viem";
-import { baseUSDC, ROZO_MIDDLE_BASE_ADDRESS } from "../constants";
 import { parseEthereum } from "../protocols/ethereum";
 import { isValidSolanaAddress } from "../protocols/solana";
 import { isValidStellarAddress } from "../protocols/stellar";
@@ -17,7 +16,6 @@ export function parseAddress(input: string): DeeplinkData | null {
     return {
       type: "solana",
       address: input,
-      message: "Detected Solana address.",
       raw: {
         data: input,
       },
@@ -27,14 +25,8 @@ export function parseAddress(input: string): DeeplinkData | null {
   if (isValidStellarAddress(input)) {
     return {
       type: "stellar",
-      toStellarAddress: input,
-      address: ROZO_MIDDLE_BASE_ADDRESS,
+      address: input,
       operation: "pay",
-      chain_id: baseUSDC.chainId,
-      asset: {
-        contract: getAddress(baseUSDC.token),
-      },
-      message: "Detected Stellar address. RozoPay will bridge to it.",
       raw: {
         data: input,
       },
@@ -56,11 +48,6 @@ export function parseAddress(input: string): DeeplinkData | null {
         type: "ethereum",
         address: getAddress(input),
         operation: "transfer",
-        chain_id: baseUSDC.chainId,
-        asset: {
-          contract: getAddress(baseUSDC.token),
-        },
-        message: `Detected EVM address with chain ${baseUSDC.chainName}. Please verify the chain is correct.`,
         raw: {
           data: input,
         },
