@@ -8,7 +8,8 @@
     "clean": "pnpm -r clean && rm -rf node_modules",
     "lint": "pnpm --filter=\"./packages/*\" lint",
     "lint:fix": "pnpm --filter=\"./packages/*\" lint:fix",
-    "type-check": "pnpm --filter=\"./packages/*\" type-check"
+    "type-check": "pnpm --filter=\"./packages/*\" type-check",
+    "postinstall": "pnpm run build"
   },
   "devDependencies": {
     "bumpp": "^10.2.0",
