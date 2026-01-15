@@ -18,6 +18,7 @@ const parsers: DeeplinkParser[] = [
   { name: "ethereum", parse: parseEthereum },
   { name: "solana", parse: parseSolana },
   { name: "stellar", parse: parseStellar },
+  { name: "unknown", parse: (input) => ({ type: "unknown", raw: input }) },
 ];
 
 export function parseDeeplink(input: string): DeeplinkData {
@@ -30,5 +31,5 @@ export function parseDeeplink(input: string): DeeplinkData {
   const addressResult = parseAddress(input);
   if (addressResult) return addressResult;
 
-  throw new Error("Unknown deeplink format");
+  return { type: "unknown", raw: input };
 }

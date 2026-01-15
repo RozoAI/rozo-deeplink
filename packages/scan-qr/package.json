@@ -1,6 +1,6 @@
 {
   "name": "@rozoai/deeplink-react",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "React component for scanning QR codes",
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
     "build": "vite build",
     "dev": "vite dev",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "bumpp": "bumpp"
+    "bumpp": "bumpp",
+    "prepare": "pnpm run build"
   },
   "keywords": [
     "react",
@@ -41,7 +42,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@rozoai/deeplink-core": "1.1.1",
+    "@rozoai/deeplink-core": "1.1.4",
     "@yudiel/react-qr-scanner": "^2.3.1"
   },
   "files": [

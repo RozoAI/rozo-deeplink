@@ -31,7 +31,10 @@ export interface BlockchainParseResult {
 
   network_name?: string;
   network_passphrase?: string;
+
+  token_address?: string;
   chain_id?: string | number;
+
   cluster?: string;
 
   callback?: string;
@@ -81,6 +84,11 @@ export interface SolanaParseResult extends BlockchainParseResult {
   operation?: "transfer" | "transaction" | "program_call";
 }
 
+export interface UnknownParseResult {
+  type: "unknown";
+  raw: string;
+}
+
 // Union type for all possible results
 export type DeeplinkData =
   | StellarParseResult
@@ -88,4 +96,4 @@ export type DeeplinkData =
   | SolanaParseResult
   | WebsiteParseResult
   | AddressParseResult
-  | BlockchainParseResult;
+  | UnknownParseResult;

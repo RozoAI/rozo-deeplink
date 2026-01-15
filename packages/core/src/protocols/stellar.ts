@@ -102,6 +102,8 @@ function parsePayOperation(
   // Add common parameters
   addCommonParameters(result, params);
 
+  result.chain_id = 1500;
+
   return result;
 }
 

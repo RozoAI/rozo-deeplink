@@ -16,14 +16,14 @@ export function parseEthereum(input: string): EthereumParseResult | null {
   const [targetAndChain, queryString] = withoutScheme.split("?");
   const [targetPart, maybeChainId] = targetAndChain.split("@");
 
-  let contractAddress: string | undefined = undefined;
+  let tokenAddress: string | undefined = undefined;
   let functionName: string | undefined = undefined;
   let recipient: string | undefined = undefined;
   let chainId: string | number | undefined = undefined;
 
   if (targetPart.includes("/")) {
     const [contract, func] = targetPart.split("/");
-    contractAddress = contract;
+    tokenAddress = contract;
     functionName = func;
   } else if (/^0x[a-fA-F0-9]{40}$/.test(targetPart)) {
     recipient = targetPart;
@@ -52,8 +52,8 @@ export function parseEthereum(input: string): EthereumParseResult | null {
     chain_id: chainId,
   };
 
-  if (contractAddress) {
-    result.asset = { contract: contractAddress };
+  if (tokenAddress) {
+    result.token_address = tokenAddress;
   }
 
   if (parameters.value) {
@@ -69,7 +69,16 @@ export function parseEthereum(input: string): EthereumParseResult | null {
   }
 
   if (parameters.address && /^0x[a-fA-F0-9]{40}$/.test(parameters.address)) {
+    // The `address` parameter is typically the recipient/spender.
     result.address = parameters.address;
+
+    // Only derive `token_address` from the URI target when it wasn't already
+    // set from a contract-style target (e.g. `ethereum:<token>/transfer`).
+    // This avoids overwriting a correct contract `token_address` with an
+    // undefined `recipient` for calls like `approve`.
+    if (!result.token_address && recipient) {
+      result.token_address = recipient;
+    }
   }
 
   result.fee = {

@@ -56,11 +56,11 @@ describe("Ethereum Parser", () => {
     it("should parse a general contract call", () => {
       const input = `ethereum:${validAddress}/approve?address=${anotherAddress}&uint256=1e18`;
       const result = parseEthereum(input) as EthereumParseResult;
-
+      console.log(result);
       expect(result).toHaveProperty("type", "ethereum");
       expect(result).toHaveProperty("operation", "approve");
       expect(result).toHaveProperty("address", anotherAddress);
-      expect(result).toHaveProperty("asset.contract", validAddress);
+      expect(result).toHaveProperty("token_address", validAddress);
       expect(result).toHaveProperty("amount", "1e18");
     });
   });
