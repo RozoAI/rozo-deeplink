@@ -23,13 +23,14 @@ This document provides practical QR code string examples for supported deeplink 
   - [6. Solana Pay – interactive transaction link (Base64-encoded URL)](#6-solana-pay--interactive-transaction-link-base64-encoded-url)
   - [7. Solana Pay – minimal (plain address, no params)](#7-solana-pay--minimal-plain-address-no-params)
 - [Stellar](#stellar)
-  - [1. Stellar Address (plain)](#1-stellar-address-plain)
-  - [2. SEP-7 Pay Request (XLM)](#2-sep-7-pay-request-xlm)
-  - [3. SEP-7 Pay Request (with asset)](#3-sep-7-pay-request-with-asset)
-  - [4. SEP-7 Pay with memo and callback](#4-sep-7-pay-with-memo-and-callback)
-  - [5. SEP-7 Pay with message and origin domain](#5-sep-7-pay-with-message-and-origin-domain)
-  - [6. SEP-7 Transaction (XDR)](#6-sep-7-transaction-xdr)
-  - [7. SEP-7 Pay with extra custom params](#7-sep-7-pay-with-extra-custom-params)
+  - [1. Stellar Address (plain G address)](#1-stellar-address-plain-g-address)
+  - [2. Stellar Contract Address (C address)](#2-stellar-contract-address-c-address)
+  - [3. SEP-7 Pay Request (XLM)](#3-sep-7-pay-request-xlm)
+  - [4. SEP-7 Pay Request (with asset)](#4-sep-7-pay-request-with-asset)
+  - [5. SEP-7 Pay with memo and callback](#5-sep-7-pay-with-memo-and-callback)
+  - [6. SEP-7 Pay with message and origin domain](#6-sep-7-pay-with-message-and-origin-domain)
+  - [7. SEP-7 Transaction (XDR)](#7-sep-7-transaction-xdr)
+  - [8. SEP-7 Pay with extra custom params](#8-sep-7-pay-with-extra-custom-params)
 - [Websites](#websites)
   - [1. HTTP](#1-http)
   - [2. HTTPS (root)](#2-https-root)
@@ -129,43 +130,49 @@ solana:3n7eT2xzUrWGWwYWnAqymPJrhRuQ9wKziZjqybjEK9ZT
 
 ## Stellar
 
-### 1. Stellar Address (plain)
+### 1. Stellar Address (plain G address)
 
 ```
 GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV
 ```
 
-### 2. SEP-7 Pay Request (XLM)
+### 2. Stellar Contract Address (C address)
+
+```
+CAHFUV2MVZ3N4VUNQ7RHECTI337SQ2D3QG7TRDSH37ND6M43D6NZANRR
+```
+
+### 3. SEP-7 Pay Request (XLM)
 
 ```
 web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&amount=120.5
 ```
 
-### 3. SEP-7 Pay Request (with asset)
+### 4. SEP-7 Pay Request (with asset)
 
 ```
 web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&asset_code=USDC&asset_issuer=GDGU5OAPHNPU5UCLE5RDJHG7PXZFQYWKCFOEXSXNMR6KRQRI5T6XXCD7&amount=100
 ```
 
-### 4. SEP-7 Pay with memo and callback
+### 5. SEP-7 Pay with memo and callback
 
 ```
 web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&amount=55.55&memo=Invoice123&memo_type=text&callback=https%3A%2F%2Fshop.com%2Fcb
 ```
 
-### 5. SEP-7 Pay with message and origin domain
+### 6. SEP-7 Pay with message and origin domain
 
 ```
 web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&msg=For payment&origin_domain=merchant.com
 ```
 
-### 6. SEP-7 Transaction (XDR)
+### 7. SEP-7 Transaction (XDR)
 
 ```
 web+stellar:tx?xdr=AAAAAgAAAAAFrgdcAAAAAgAAAAAAAAAAAAAAAwAAAAAAAAAAUQAAAAAAABMtAAAAAAEAAQAAAAEAAAAAAAAAAQAAAABU2lkHD5fTYNbAABehcVQAAAAAA==&replace=0,1
 ```
 
-### 7. SEP-7 Pay with extra custom params
+### 8. SEP-7 Pay with extra custom params
 
 ```
 web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&amount=46.1&custom_param=rozo&another_param=test

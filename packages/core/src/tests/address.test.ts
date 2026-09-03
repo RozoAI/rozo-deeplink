@@ -29,6 +29,15 @@ describe("parseAddress", () => {
     expect("address" in result ? result.address : "").toBe(input);
   });
 
+  it("should correctly parse a Stellar contract address (C address)", () => {
+    const input = "CAHFUV2MVZ3N4VUNQ7RHECTI337SQ2D3QG7TRDSH37ND6M43D6NZANRR";
+    const result = parseAddress(input);
+    expect(result).not.toBeNull();
+    if (!result) return;
+    expect(result.type).toBe("stellar");
+    expect("address" in result ? result.address : "").toBe(input);
+  });
+
   it("should return null for an invalid address", () => {
     const input = "this-is-not-a-valid-address";
     const result = parseAddress(input);
