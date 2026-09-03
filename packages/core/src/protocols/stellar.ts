@@ -26,7 +26,10 @@ export function parseStellar(input: string): StellarParseResult | null {
   }
 
   // Handle plain Stellar address format (G = account, C = contract)
-  if (!StrKey.isValidEd25519PublicKey(input) && !StrKey.isValidContract(input)) {
+  if (
+    !StrKey.isValidEd25519PublicKey(input) &&
+    !StrKey.isValidContract(input)
+  ) {
     return null;
   }
 
@@ -40,7 +43,9 @@ export function parseStellar(input: string): StellarParseResult | null {
 }
 
 export function isValidStellarAddress(address: string): boolean {
-  return StrKey.isValidEd25519PublicKey(address) || StrKey.isValidContract(address);
+  return (
+    StrKey.isValidEd25519PublicKey(address) || StrKey.isValidContract(address)
+  );
 }
 
 function parsePayOperation(
