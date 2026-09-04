@@ -2,8 +2,6 @@
 
 A universal QR code / deeplink parser that supports multiple blockchain protocols and payment standards.
 
-**Version**: 1.1.4
-
 ## Overview
 
 `parseDeeplink` automatically detects and parses QR codes or deeplink strings for:
@@ -135,8 +133,8 @@ export type DeeplinkData =
 interface EthereumParseResult {
   type: "ethereum";
   operation?: "transfer" | "transaction" | "contract_call" | string;
-  address?: string;           // recipient or spender
-  token_address?: string;     // ERC-20 contract address
+  address?: string; // recipient or spender
+  token_address?: string; // ERC-20 contract address
   chain_id?: string | number;
   amount?: string;
   fee?: {
@@ -158,12 +156,12 @@ interface SolanaParseResult {
   operation?: "transfer" | "transaction" | "program_call";
   address?: string;
   amount?: string;
-  asset?: { contract?: string };  // SPL token mint address
+  asset?: { contract?: string }; // SPL token mint address
   memo?: string;
-  origin_domain?: string;         // mapped from `label` param
-  user_message?: string;          // mapped from `message` param
-  callback?: string;              // HTTPS link for transaction requests
-  extra_params?: Record<string, string>;  // includes `reference` keys
+  origin_domain?: string; // mapped from `label` param
+  user_message?: string; // mapped from `message` param
+  callback?: string; // HTTPS link for transaction requests
+  extra_params?: Record<string, string>; // includes `reference` keys
   raw?: { data?: string };
 }
 ```
@@ -174,17 +172,17 @@ interface SolanaParseResult {
 interface StellarParseResult {
   type: "stellar";
   operation?: "pay" | "tx";
-  address?: string;           // destination (pay) or undefined (tx)
+  address?: string; // destination (pay) or undefined (tx)
   amount?: string;
   asset?: { code?: string; issuer?: string };
   memo?: string;
   memo_type?: string;
   callback?: string;
-  message?: string;           // mapped from `msg` param
+  message?: string; // mapped from `msg` param
   network_passphrase?: string;
   origin_domain?: string;
   signature?: string;
-  chain_id?: number;          // 1500 for Stellar mainnet (pay only)
+  chain_id?: number; // 1500 for Stellar mainnet (pay only)
   extra_params?: Record<string, string>;
   raw?: { xdr?: string; data?: string };
 }
@@ -287,7 +285,9 @@ parseDeeplink(
 // }
 
 // Stellar SEP-7 tx
-parseDeeplink("web+stellar:tx?xdr=AAAA...&network_passphrase=Public%20Global%20Stellar%20Network%20%3B%20September%202015");
+parseDeeplink(
+  "web+stellar:tx?xdr=AAAA...&network_passphrase=Public%20Global%20Stellar%20Network%20%3B%20September%202015"
+);
 // {
 //   type: "stellar",
 //   operation: "tx",

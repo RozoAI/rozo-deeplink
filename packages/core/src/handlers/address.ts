@@ -1,7 +1,7 @@
+import { StrKey } from "@stellar/stellar-sdk";
 import { getAddress, isAddress } from "viem";
 import { parseEthereum } from "../protocols/ethereum";
 import { isValidSolanaAddress } from "../protocols/solana";
-import { isValidStellarAddress } from "../protocols/stellar";
 import type { DeeplinkData } from "../types";
 
 /**
@@ -22,11 +22,22 @@ export function parseAddress(input: string): DeeplinkData | null {
     };
   }
 
-  if (isValidStellarAddress(input)) {
+  // G-addresses are accounts (payable); C-addresses are contracts (not payable)
+  if (StrKey.isValidEd25519PublicKey(input)) {
     return {
       type: "stellar",
       address: input,
       operation: "pay",
+      raw: {
+        data: input,
+      },
+    };
+  }
+
+  if (StrKey.isValidContract(input)) {
+    return {
+      type: "stellar",
+      address: input,
       raw: {
         data: input,
       },

@@ -177,6 +177,16 @@ describe("Stellar Parser", () => {
       });
     });
 
+    it("should parse Stellar contract address (C address)", () => {
+      const input = "CAHFUV2MVZ3N4VUNQ7RHECTI337SQ2D3QG7TRDSH37ND6M43D6NZANRR";
+      const result = parseStellar(input) as StellarParseResult;
+      expect(result).not.toBeNull();
+      expect(result).toMatchObject({
+        type: "stellar",
+        address: input,
+      });
+    });
+
     it("should reject invalid address format", () => {
       const input = "INVALID_STELLAR_ADDRESS";
       const result = parseStellar(input);

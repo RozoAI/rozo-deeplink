@@ -4,12 +4,12 @@ pnpm monorepo publishing three deeplink packages used across Rozo apps for QR co
 
 ## Packages
 
-| Package | NPM name | Purpose |
-|---|---|---|
-| `packages/core` | `@rozoai/deeplink-core` | Core deeplink URL builder, QR spec |
-| `packages/react` | `@rozoai/deeplink-react` | React hooks + components |
-| `packages/react-native` | `@rozoai/deeplink-react-native` | React Native hooks + components |
-| `apps/` | demo apps | Integration examples |
+| Package                 | NPM name                        | Purpose                            |
+| ----------------------- | ------------------------------- | ---------------------------------- |
+| `packages/core`         | `@rozoai/deeplink-core`         | Core deeplink URL builder, QR spec |
+| `packages/react`        | `@rozoai/deeplink-react`        | React hooks + components           |
+| `packages/react-native` | `@rozoai/deeplink-react-native` | React Native hooks + components    |
+| `apps/`                 | demo apps                       | Integration examples               |
 
 ## Development Commands
 
@@ -49,10 +49,3 @@ cd packages/core && pnpm release
 - `QRSpec.md` documents the QR code URL format spec
 - Used by: `rozo-invoice`, `rozo-privy`, `rozo-wallets-express`, `intent-pay`
 - Published as `@rozoai/deeplink-*` to npm
-
-## Helper Scripts
-
-```bash
-chp                          # Project overview
-chs find-code "pattern"      # Fast search
-```
