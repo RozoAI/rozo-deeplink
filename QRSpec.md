@@ -142,6 +142,8 @@ GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV
 CAHFUV2MVZ3N4VUNQ7RHECTI337SQ2D3QG7TRDSH37ND6M43D6NZANRR
 ```
 
+> **Note:** C-addresses are Soroban smart contracts, not user accounts. `parseAddress()` returns `{ type: "stellar", address: ... }` **without** `operation: "pay"`. Consumers should not start an account-payment flow for contract addresses.
+
 ### 3. SEP-7 Pay Request (XLM)
 
 ```
