@@ -1,0 +1,43 @@
+name: config integrity
+
+# Guards against the injection found in two sibling repositories on
+# 2026-09-22, where a loader was appended to postcss.config.js behind roughly
+# 5,000 spaces so it sat off the right edge of an editor. Vite loads that file
+# on every build, so the loader ran on every CI build and on every developer
+# machine that built the app. It fetched a remote document, read a value out of
+# Ethereum contract storage to locate its payload, decrypted it and called
+# eval, which means the command it ran was never in the repository.
+#
+# It was committed twice, eleven months apart, each time riding on an unrelated
+# change, and it came back after being removed. It was found only because it
+# happened to throw during a build.
+#
+# Config files are hand-written and short. A line of a thousand characters in
+# one is not a formatting accident.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  long-lines:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fail on suspiciously long lines in config files
+        run: |
+          set -euo pipefail
+          hits=$(find . -type f \
+            \( -name '*.config.js'  -o -name '*.config.ts' \
+            -o -name '*.config.mjs' -o -name '*.config.cjs' \) \
+            -not -path './node_modules/*' -not -path './dist/*' \
+            -not -path './.next/*' -not -path './build/*' \
+            -exec awk 'length($0) > 1000 { print FILENAME ": line " NR " is " length($0) " characters" }' {} + )
+          if [ -n "$hits" ]; then
+            echo "::error::Suspiciously long line(s) in config files. This is how the 2026-09-22 postcss.config.js injection hid."
+            echo "$hits"
+            exit 1
+          fi
+          echo "No config file has a line over 1000 characters."
