@@ -56,3 +56,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request if you have any suggestions or improvements. 
+
+## Secret scanning
+
+Enable the local gitleaks pre-commit hook once per clone: `brew install gitleaks pre-commit && pre-commit install` (config in `.pre-commit-config.yaml`). CI also runs a report-only scan in `.github/workflows/secret-scan.yml`.
