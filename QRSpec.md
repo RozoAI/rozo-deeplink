@@ -159,8 +159,10 @@ web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA2
 ### 5. SEP-7 Pay with memo and callback
 
 ```
-web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&amount=55.55&memo=Invoice123&memo_type=text&callback=https%3A%2F%2Fshop.com%2Fcb
+web+stellar:pay?destination=GC65CUPW2IMTJJY6CII7F3OBPVG4YGASEPBBLM4V3LBKX62P6LA24OFV&amount=55.55&memo=Invoice123&memo_type=MEMO_TEXT&callback=https%3A%2F%2Fshop.com%2Fcb
 ```
+
+`memo_type` uses the SEP-7 standard values: `MEMO_TEXT`, `MEMO_ID`, `MEMO_HASH`, `MEMO_RETURN`.
 
 ### 6. SEP-7 Pay with message and origin domain
 
