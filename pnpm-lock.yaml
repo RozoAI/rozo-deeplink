@@ -28,10 +28,10 @@ importers:
         version: 1.2.4(@types/react@19.2.7)(react@19.1.0)
       '@rozoai/deeplink-core':
         specifier: 1.1.7
-        version: 1.1.7(bufferutil@4.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
+        version: 1.1.7(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@rozoai/deeplink-react':
         specifier: 1.1.7
-        version: 1.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(supports-color@8.1.1)(typescript@5.9.3)
+        version: 1.1.7(@types/emscripten@1.41.5)(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@uiw/react-json-view':
         specifier: 2.0.0-alpha.33
         version: 2.0.0-alpha.33(@babel/runtime@7.28.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -159,7 +159,7 @@ importers:
     dependencies:
       '@rozoai/deeplink-core':
         specifier: 1.1.7
-        version: 1.1.7(bufferutil@4.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
+        version: 1.1.7(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
       expo:
         specifier: '>=49'
         version: 54.0.30(@babel/core@7.28.5(supports-color@8.1.1))(bufferutil@4.1.0)(react-native@0.83.1(@babel/core@7.28.5(supports-color@8.1.1))(@types/react@19.2.7)(bufferutil@4.1.0)(react@19.3.0)(supports-color@8.1.1)(utf-8-validate@5.0.10))(react@19.3.0)(supports-color@8.1.1)(utf-8-validate@5.0.10)
@@ -187,7 +187,7 @@ importers:
     dependencies:
       '@rozoai/deeplink-core':
         specifier: 1.1.7
-        version: 1.1.7(bufferutil@4.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
+        version: 1.1.7(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@yudiel/react-qr-scanner':
         specifier: ^2.3.1
         version: 2.5.0(@types/emscripten@1.41.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -3059,8 +3059,8 @@ packages:
     resolution: {integrity: sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==}
     engines: {node: '>= 0.6'}
 
-  compression@1.8.1:
-    resolution: {integrity: sha512-9mAqGPHLakhCLeNyxPkK4xVo746zQ/czLH1Ky+vkitMnWfWZps8r0qXuwhwizagCRttsL4lfG4pIOvaWLpAP0w==}
+  compression@1.8.2:
+    resolution: {integrity: sha512-o8vI5RE5A6EVVOd9o41jKp41aJom+QTEO/Bx8MYNjexMo/Bv2WOjUfZr+aL0WnYSgymUy6zeguqLTsIhV0gMvQ==}
     engines: {node: '>= 0.8.0'}
 
   concat-map@0.0.1:
@@ -6825,7 +6825,7 @@ snapshots:
       bplist-parser: 0.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
-      compression: 1.8.1(supports-color@8.1.1)
+      compression: 1.8.2(supports-color@8.1.1)
       connect: 3.7.0(supports-color@8.1.1)
       debug: 4.4.3(supports-color@8.1.1)
       env-editor: 0.4.2
@@ -7014,7 +7014,7 @@ snapshots:
       metro-resolver: 0.83.3
       metro-runtime: 0.83.3
       metro-source-map: 0.83.3(supports-color@8.1.1)
-      metro-symbolicate: 0.83.3(supports-color@8.1.1)
+      metro-symbolicate: 0.83.3
       metro-transform-plugins: 0.83.3(supports-color@8.1.1)
       metro-transform-worker: 0.83.3(bufferutil@4.1.0)(supports-color@8.1.1)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
@@ -7819,7 +7819,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.54.0':
     optional: true
 
-  '@rozoai/deeplink-core@1.1.7(bufferutil@4.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)':
+  '@rozoai/deeplink-core@1.1.7(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)':
     dependencies:
       '@solana/web3.js': 1.98.4(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@stellar/stellar-sdk': 12.3.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
@@ -7835,9 +7835,9 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@rozoai/deeplink-react@1.1.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(supports-color@8.1.1)(typescript@5.9.3)':
+  '@rozoai/deeplink-react@1.1.7(@types/emscripten@1.41.5)(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)':
     dependencies:
-      '@rozoai/deeplink-core': 1.1.7(bufferutil@4.1.0)(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
+      '@rozoai/deeplink-core': 1.1.7(bufferutil@4.1.0)(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)(utf-8-validate@5.0.10)
       '@yudiel/react-qr-scanner': 2.5.0(@types/emscripten@1.41.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -8773,6 +8773,7 @@ snapshots:
   babel-plugin-react-compiler@1.0.0:
     dependencies:
       '@babel/types': 7.29.7
+    optional: true
 
   babel-plugin-react-native-web@0.21.2: {}
 
@@ -9116,11 +9117,12 @@ snapshots:
     dependencies:
       mime-db: 1.54.0
 
-  compression@1.8.1(supports-color@8.1.1):
+  compression@1.8.2(supports-color@8.1.1):
     dependencies:
       bytes: 3.1.2
       compressible: 2.0.18
       debug: 2.6.9(supports-color@8.1.1)
+      destroy: 1.2.0
       negotiator: 0.6.4
       on-headers: 1.1.0
       safe-buffer: 5.2.1
@@ -10240,11 +10242,11 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  isomorphic-ws@4.0.1(ws@7.5.10):
+  isomorphic-ws@4.0.1(ws@7.5.10(bufferutil@4.1.0)(utf-8-validate@5.0.10)):
     dependencies:
       ws: 7.5.10(bufferutil@4.1.0)(utf-8-validate@5.0.10)
 
-  isows@1.0.7(ws@8.18.3):
+  isows@1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)):
     dependencies:
       ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
 
@@ -10278,7 +10280,7 @@ snapshots:
       delay: 5.0.0
       es6-promisify: 5.0.0
       eyes: 0.1.8
-      isomorphic-ws: 4.0.1(ws@7.5.10)
+      isomorphic-ws: 4.0.1(ws@7.5.10(bufferutil@4.1.0)(utf-8-validate@5.0.10))
       json-stringify-safe: 5.0.1
       stream-json: 1.9.1
       uuid: 8.3.2
@@ -10661,7 +10663,7 @@ snapshots:
       '@babel/types': 7.28.5
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
-      metro-symbolicate: 0.83.3(supports-color@8.1.1)
+      metro-symbolicate: 0.83.3
       nullthrows: 1.1.1
       ob1: 0.83.3
       source-map: 0.5.7
@@ -10669,7 +10671,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  metro-symbolicate@0.83.3(supports-color@8.1.1):
+  metro-symbolicate@0.83.3:
     dependencies:
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
@@ -10677,8 +10679,6 @@ snapshots:
       nullthrows: 1.1.1
       source-map: 0.5.7
       vlq: 1.0.1
-    transitivePeerDependencies:
-      - supports-color
 
   metro-transform-plugins@0.83.3(supports-color@8.1.1):
     dependencies:
@@ -10743,7 +10743,7 @@ snapshots:
       metro-resolver: 0.83.3
       metro-runtime: 0.83.3
       metro-source-map: 0.83.3(supports-color@8.1.1)
-      metro-symbolicate: 0.83.3(supports-color@8.1.1)
+      metro-symbolicate: 0.83.3
       metro-transform-plugins: 0.83.3(supports-color@8.1.1)
       metro-transform-worker: 0.83.3(bufferutil@4.1.0)(supports-color@8.1.1)(utf-8-validate@5.0.10)
       mime-types: 2.1.35
@@ -12102,7 +12102,7 @@ snapshots:
       '@scure/bip32': 1.7.0
       '@scure/bip39': 1.6.0
       abitype: 1.2.3(typescript@5.9.3)
-      isows: 1.0.7(ws@8.18.3)
+      isows: 1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))
       ox: 0.11.1(typescript@5.9.3)
       ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
     optionalDependencies:
